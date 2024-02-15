@@ -2,7 +2,6 @@
   "name": "client",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,13 +9,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/pro-theme": "^0.10.0",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/open-sans": "^5.0.24",
+    "@fontsource-variable/raleway": "^5.0.17",
+    "@fontsource/meddon": "^5.0.18",
+    "@fontsource/open-sans": "^5.0.23",
+    "@fontsource/raleway": "^5.0.16",
+    "@tanstack/react-query": "4.24.10",
+    "@types/react-infinite-scroller": "^1.2.5",
+    "axios": "^1.6.7",
     "framer-motion": "^11.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-query": "^3.39.3",
+    "react-icons": "^5.0.1",
+    "react-infinite-scroller": "^1.2.6",
     "react-router-dom": "^6.22.0"
   },
   "devDependencies": {

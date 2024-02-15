@@ -26,6 +26,8 @@ export const loginUser = async (req: any, res: any) => {
 export const registerUser = async (req: any, res: any) => {
   const { firstName, email, password } = req.body;
 
+  console.log(firstName, email, password);
+
   try {
     const user = await (User as any).register(firstName, email, password);
     const token = await createToken(user._id);

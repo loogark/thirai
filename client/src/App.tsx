@@ -1,45 +1,23 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import React, { useState } from "react";
-import "./App.css";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-
-const Star = () => {
-  const [count, setCount] = useState(0);
-
-  return (
-    <>
-      <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  );
-};
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Header } from "./components/Header";
+import { UsersProvider } from "./context/UserProvider";
+import { queryClient } from "./utils/query";
+import { createTheme } from "./utils/theme";
 
 function App() {
+  const proTheme = createTheme();
   return (
-    <React.StrictMode>
-      <ChakraProvider>
-        <Star />
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider theme={proTheme}>
+        <UsersProvider>
+          <Header />
+          <Outlet />
+          <ScrollRestoration />
+        </UsersProvider>
       </ChakraProvider>
-    </React.StrictMode>
+    </QueryClientProvider>
   );
 }
 
