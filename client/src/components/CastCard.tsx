@@ -39,7 +39,7 @@ export const CastCard = ({ data }: Props) => {
         maxW='400px'
         ratio={0.67 / 1}
         as={ReactRouterLink}
-        to={`/movie/${data?.id}`}
+        to={`/person/${data?.id}`}
       >
         <>
           <Image

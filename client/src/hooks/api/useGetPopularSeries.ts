@@ -1,11 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { API } from "../../utils/query";
 
-export const useGetPopularMovies = () => {
+export const useGetPopularSeries = () => {
   const query = useInfiniteQuery(
-    ["popular-movies"],
+    ["popular-series"],
     async ({ pageParam = 1 }) => {
-      const response = await API.get(`api/movie/popular/${pageParam}`);
+      const response = await API.get(`api/show/popular/${pageParam}`);
       return { ...response.data, nextCursor: pageParam + 1 };
     },
     {

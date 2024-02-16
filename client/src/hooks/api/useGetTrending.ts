@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { API } from "../../utils/query";
 
-export const useGetTrending = (type: "movie" | "tv") => {
+export const useGetTrending = (type: "movie" | "tv", sendAll?: boolean) => {
   const query = useQuery(
-    ["trending", type],
+    ["trending", type, sendAll],
     async () => {
       const response = await API.get(`api/trending/${type}`);
-      return response.data;
+      return sendAll ? response.data : response.data?.results[0];
     },
     {
       onSuccess: (data) => {},

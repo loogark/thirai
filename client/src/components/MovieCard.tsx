@@ -8,9 +8,10 @@ import { Rating } from "./Rating";
 
 interface Props {
   data: Record<string, any>;
+  isShow?: boolean;
 }
 
-export const MovieCard = ({ data }: Props) => {
+export const MovieCard = ({ data, isShow }: Props) => {
   const [parentRef, setParentRef] = useState<HTMLDivElement | null>(null);
   const isHovered = useIsHovered([parentRef]).some(Boolean);
 
@@ -39,7 +40,7 @@ export const MovieCard = ({ data }: Props) => {
         maxW='400px'
         ratio={0.67 / 1}
         as={ReactRouterLink}
-        to={`/movie/${data?.id}`}
+        to={isShow ? `/show/${data?.id}` : `/movie/${data?.id}`}
       >
         <>
           <Image
@@ -48,7 +49,11 @@ export const MovieCard = ({ data }: Props) => {
             fallbackSrc='https://mymovies-client.onrender.com/static/media/EmptyCard.82427e86b72979c60e4e5bce792b9c52.svg'
             h='100%'
             objectFit='contain'
-            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${data?.poster_path}`}
+            src={
+              data?.poster_path
+                ? `https://image.tmdb.org/t/p/w370_and_h556_bestv2${data?.poster_path}`
+                : "https://mymovies-client.onrender.com/static/media/EmptyCard.82427e86b72979c60e4e5bce792b9c52.svg"
+            }
           />
           {isHovered && (
             <Box

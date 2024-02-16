@@ -10,7 +10,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CastRow } from "../components/CastRow";
 import { Hero } from "../components/Hero";
@@ -21,16 +21,23 @@ import { useGetMovie } from "../hooks/api/useGetMovie";
 export const Movie = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetMovie(id!);
+  const [tabIndex, setTabIndex] = useState(0);
 
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
+
+  useEffect(() => {
+    return () => {
+      setTabIndex(0);
+    };
+  }, [id]);
 
   const container = {
     hidden: { opacity: isInView ? 1 : 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -45,7 +52,13 @@ export const Movie = () => {
       gap={8}
     >
       <Hero data={data} loading={isLoading} />
-      <Tabs w='100%' variant='soft-rounded' isLazy>
+      <Tabs
+        w='100%'
+        variant='soft-rounded'
+        isLazy
+        index={tabIndex}
+        onChange={(i) => setTabIndex(i)}
+      >
         <TabList>
           <Flex
             w='100%'

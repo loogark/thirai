@@ -13,10 +13,10 @@ import { useRef } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { Hero } from "../components/Hero";
 import { MovieCard } from "../components/MovieCard";
-import { useGetPopularMovies } from "../hooks/api/useGetPopularMovies";
-import { useGetTopRatedMovies } from "../hooks/api/useGetTopRatedMovies";
+import { useGetOnAirSeries } from "../hooks/api/useGetOnAirSeries";
+import { useGetPopularSeries } from "../hooks/api/useGetPopularSeries";
+import { useGetTopRatedSeries } from "../hooks/api/useGetTopRatedSeries";
 import { useGetTrending } from "../hooks/api/useGetTrending";
-import { useGetUpcomingMovies } from "../hooks/api/useGetUpcomingMovies";
 
 const LocalTabList = [
   {
@@ -24,29 +24,32 @@ const LocalTabList = [
     name: "Popular",
   },
   {
+    id: "on-air",
+    name: "On-Air",
+  },
+  {
     id: "top-rated",
     name: "Top-Rated",
   },
-  {
-    id: "upcoming",
-    name: "Upcoming",
-  },
 ];
 
-export const Movies = () => {
-  const { data, isLoading } = useGetTrending("movie");
+export const Shows = () => {
+  const { data, isLoading } = useGetTrending("tv");
   const {
-    data: popularMovies,
-    fetchNextPage: nextPopularMovies,
-    hasNextPage: hasMorePopular,
-  } = useGetPopularMovies();
-
-  const { data: topRated, fetchNextPage, hasNextPage } = useGetTopRatedMovies();
+    data: onAirSeries,
+    fetchNextPage: nextOnAirSeries,
+    hasNextPage: hasMoreOnAir,
+  } = useGetOnAirSeries();
   const {
-    data: upcoming,
-    fetchNextPage: nextUpcomingPage,
-    hasNextPage: hasUpcomingNext,
-  } = useGetUpcomingMovies();
+    data: popularSeries,
+    fetchNextPage: nextPopularSeries,
+    hasNextPage: hasMorePopularSeries,
+  } = useGetPopularSeries();
+  const {
+    data: topRatedSeries,
+    fetchNextPage: nextTopRatedSeries,
+    hasNextPage: hasMoreTopRatedSeries,
+  } = useGetTopRatedSeries();
 
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
@@ -72,7 +75,7 @@ export const Movies = () => {
     >
       <Hero data={data} loading={isLoading} />
 
-      <Tabs variant='soft-rounded' isLazy>
+      <Tabs variant='soft-rounded' isLazy w={"100%"}>
         <TabList>
           <Flex
             w='100%'
@@ -82,7 +85,7 @@ export const Movies = () => {
             align='center'
           >
             <Heading lineHeight='tall' size='xs' color='white'>
-              Movies
+              Tv Shows
             </Heading>
             <Flex direction='row' justify='center' align='center' gap='4px'>
               {LocalTabList.map((tab) => (
@@ -100,8 +103,8 @@ export const Movies = () => {
           <TabPanel>
             <InfiniteScroll
               pageStart={1}
-              loadMore={() => nextPopularMovies()}
-              hasMore={hasMorePopular}
+              loadMore={() => nextPopularSeries()}
+              hasMore={hasMorePopularSeries}
               loader={<Spinner my='24px' color='#525CEB' size='xl' />}
             >
               <Flex
@@ -117,9 +120,9 @@ export const Movies = () => {
                 whileInView='show'
                 viewport={{ once: true }}
               >
-                {popularMovies?.pages.map((res) => {
+                {popularSeries?.pages.map((res) => {
                   return res.results.map((movie: any) => (
-                    <MovieCard key={movie.id} data={movie} />
+                    <MovieCard isShow key={movie.id} data={movie} />
                   ));
                 })}
               </Flex>
@@ -128,8 +131,8 @@ export const Movies = () => {
           <TabPanel>
             <InfiniteScroll
               pageStart={1}
-              loadMore={() => fetchNextPage()}
-              hasMore={hasNextPage}
+              loadMore={() => nextOnAirSeries()}
+              hasMore={hasMoreOnAir}
               loader={<Spinner my='24px' color='#525CEB' size='xl' />}
             >
               <Flex
@@ -139,9 +142,9 @@ export const Movies = () => {
                 wrap='wrap'
                 gap='24px'
               >
-                {topRated?.pages.map((res) => {
+                {onAirSeries?.pages.map((res) => {
                   return res.results.map((movie: any) => (
-                    <MovieCard key={movie.id} data={movie} />
+                    <MovieCard isShow key={movie.id} data={movie} />
                   ));
                 })}
               </Flex>
@@ -150,8 +153,8 @@ export const Movies = () => {
           <TabPanel>
             <InfiniteScroll
               pageStart={1}
-              loadMore={() => nextUpcomingPage()}
-              hasMore={hasUpcomingNext}
+              loadMore={() => nextTopRatedSeries()}
+              hasMore={hasMoreTopRatedSeries}
               loader={<Spinner my='24px' color='#525CEB' size='xl' />}
             >
               <Flex
@@ -161,9 +164,9 @@ export const Movies = () => {
                 wrap='wrap'
                 gap='24px'
               >
-                {upcoming?.pages.map((res) => {
+                {topRatedSeries?.pages.map((res) => {
                   return res.results.map((movie: any) => (
-                    <MovieCard key={movie.id} data={movie} />
+                    <MovieCard isShow key={movie.id} data={movie} />
                   ));
                 })}
               </Flex>

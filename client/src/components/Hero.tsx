@@ -15,9 +15,10 @@ import { Rating } from "./Rating";
 interface Props {
   data: Record<string, any>;
   loading: boolean;
+  status?: string;
 }
 
-export const Hero = ({ data, loading }: Props) => {
+export const Hero = ({ data, loading, status }: Props) => {
   if (loading) return <HeroLoader />;
 
   return (
@@ -64,15 +65,18 @@ export const Hero = ({ data, loading }: Props) => {
           zIndex={1}
           gap={2}
         >
-          <Heading as='h1' size='xl' color='white'>
-            {data?.original_title}
+          <Heading textAlign='start' as='h1' size='xl' color='white'>
+            {data?.original_title ?? data?.original_name}
           </Heading>
           <HStack gap='2' mr='4px'>
-            {data?.genres.map((genre: Record<string, any>) => (
+            {data?.genres?.map((genre: Record<string, any>) => (
               <Tag variant='solid' colorScheme='blue' key={genre.id}>
                 {genre.name}
               </Tag>
             ))}
+            {status && (
+              <Tag colorScheme='red' variant='solid'>{`Status: ${status}`}</Tag>
+            )}
           </HStack>
           <Text textAlign='start' noOfLines={3} fontSize='lg' color='white'>
             {data?.overview}{" "}

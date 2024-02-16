@@ -1,13 +1,15 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { Hero } from "../components/Hero";
 import { MovieRow } from "../components/MovieRow";
-import { useGetSingleTrending } from "../hooks/api/useGetSingleTrending";
 import { useGetTrending } from "../hooks/api/useGetTrending";
 
 export const Home = () => {
-  const { data, isLoading } = useGetSingleTrending();
-  const { data: movieData, isLoading: movieLoading } = useGetTrending("movie");
-  const { data: tvData, isLoading: tvLoading } = useGetTrending("tv");
+  const { data, isLoading } = useGetTrending("movie");
+  const { data: movieData, isLoading: movieLoading } = useGetTrending(
+    "movie",
+    true
+  );
+  const { data: tvData, isLoading: tvLoading } = useGetTrending("tv", true);
 
   return (
     <Flex
@@ -30,9 +32,10 @@ export const Home = () => {
       <Box p='24px' as='section' w='100%' h='fit-content'>
         <MovieRow
           title='Trending Series'
-          path='/series'
+          path='/shows'
           data={tvData}
           loading={tvLoading}
+          isShow={true}
         />
       </Box>
     </Flex>

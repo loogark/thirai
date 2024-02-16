@@ -9,9 +9,10 @@ interface Props {
   loading: boolean;
   title: string;
   path: string;
+  isShow?: boolean;
 }
 
-export const MovieRow = ({ data, loading, title, path }: Props) => {
+export const MovieRow = ({ data, loading, title, path, isShow }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
 
@@ -55,8 +56,8 @@ export const MovieRow = ({ data, loading, title, path }: Props) => {
         h='fit-content'
         overflowX='scroll'
       >
-        {data?.results.map((movie: any) => (
-          <MovieCard key={data.id} data={movie} />
+        {data?.results?.map((movie: any) => (
+          <MovieCard key={data.id} data={movie} isShow={isShow} />
         ))}
       </Flex>
     </Flex>

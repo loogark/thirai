@@ -2,17 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 import { API } from "../../utils/query";
 import { useGetTrending } from "./useGetTrending";
 
-export const useGetSingleTrending = () => {
-  const { data } = useGetTrending("movie");
+export const useGetSingleTrendingSeries = () => {
+  const { data } = useGetTrending("tv");
 
   const singleData = data?.results?.filter(
     (single: Record<string, any>) => single.media_type !== "person"
   )[Math.floor(Math.random() * 10)];
 
   const query = useQuery(
-    ["trendingMovie", singleData?.id],
+    ["trending_series", singleData?.id],
     async () => {
-      const response = await API.get(`api/trending/movie/${singleData?.id}`);
+      const response = await API.get(`api/tv/${singleData?.id}`);
       return response.data;
     },
     {

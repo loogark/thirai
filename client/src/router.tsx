@@ -4,6 +4,9 @@ import { Auth } from "./pages/Auth";
 import { Home } from "./pages/Home";
 import { Movie } from "./pages/Movie";
 import { Movies } from "./pages/Movies";
+import { Person } from "./pages/Person";
+import { Show } from "./pages/Show";
+import { Shows } from "./pages/Shows";
 
 export namespace Router {
   export const _router = createBrowserRouter([
@@ -30,6 +33,18 @@ export namespace Router {
         {
           path: "/movie/:id",
           element: <Movie />,
+        },
+        {
+          path: "/shows",
+          element: <Shows />,
+        },
+        {
+          path: "/show/:id",
+          element: <Show />,
+        },
+        {
+          path: "/person/:id",
+          element: <Person />,
         },
       ],
     },

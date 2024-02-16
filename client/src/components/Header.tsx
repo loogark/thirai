@@ -60,7 +60,7 @@ export const Header = () => {
           fontWeight={700}
           color='white'
           as={ReactRouterLink}
-          to='/series'
+          to='/shows'
           borderRadius='6px'
           _hover={{ bg: "#525CEB", color: "white" }}
         >
