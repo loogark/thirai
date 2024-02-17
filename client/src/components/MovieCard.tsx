@@ -92,7 +92,9 @@ export const MovieCard = ({ data, isShow, department }: Props) => {
             mx='2'
           >
             {" "}
-            {data?.original_title ?? data?.original_name}
+            {data?.original_title ??
+              data?.original_name ??
+              data?.original_title}
           </Text>
           <Like data={data} />
         </Flex>

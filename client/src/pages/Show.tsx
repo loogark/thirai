@@ -25,7 +25,6 @@ export const Show = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
   const noSimilarShows = data?.similar?.results.length === 0;
-  console.log(data);
 
   useEffect(() => {
     return () => {

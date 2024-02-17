@@ -8,11 +8,11 @@ export const userCollection = new Schema(
       type: Number,
       required: true,
     },
-    title: {
+    original_title: {
       type: String,
       required: true,
     },
-    mediaType: {
+    media_type: {
       type: String,
       required: true,
     },
@@ -24,10 +24,21 @@ export const userCollection = new Schema(
       type: String,
       required: true,
     },
-    imagePath: {
+    poster_path: {
       type: String,
-      required: true,
-      nullable: true,
+      required: false,
+    },
+    profile_path: {
+      type: String,
+      required: false,
+    },
+    vote_average: {
+      type: Number,
+      required: false,
+    },
+    vote_count: {
+      type: Number,
+      required: false,
     },
   },
   { timestamps: true }

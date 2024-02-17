@@ -4,9 +4,12 @@ import { API, queryClient } from "../../utils/query";
 
 interface CollectionData {
   mediaId: string;
-  mediaType: string;
-  title: string;
-  imagePath: string;
+  original_title: string;
+  media_type: string;
+  vote_average?: number;
+  vote_count?: number;
+  profile_path?: string;
+  poster_path?: string;
 }
 
 export const useAddToCollection = () => {

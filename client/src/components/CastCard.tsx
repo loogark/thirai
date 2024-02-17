@@ -72,7 +72,7 @@ export const CastCard = ({ data }: Props) => {
             fontWeight='bold'
           >
             {" "}
-            {data?.name ?? data?.original_name}
+            {data?.name ?? data?.original_name ?? data?.original_title}
           </Text>
         </VStack>
         <Like data={data} />

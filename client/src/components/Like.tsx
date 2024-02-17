@@ -14,11 +14,12 @@ export const Like = ({ data }: Props) => {
   const { data: collectionData, isLoading } = useGetCollection();
   const addToCollection = useAddToCollection();
   const removeFromCollection = useRemoveFromCollection();
+  console.log(data, "data");
 
   const collectItem = useMemo(
     () =>
       collectionData?.collection?.find((item: any) => {
-        return item?.mediaId === data?.id;
+        return item?.mediaId === data?.id || data?.mediaId;
       }),
     [collectionData?.collection, data?.id]
   );
@@ -33,12 +34,16 @@ export const Like = ({ data }: Props) => {
       whileTap={{ scale: 0.8 }}
       onClick={() => {
         collectItem !== undefined
-          ? removeFromCollection.mutate({ id: collectItem?._id })
+          ? removeFromCollection.mutate({ id: data?._id ?? collectItem?._id })
           : addToCollection.mutate({
               mediaId: data?.id,
-              mediaType: data?.media_type ?? "person",
-              title: data?.original_title ?? data?.original_name ?? data?.name,
-              imagePath: data?.poster_path ?? data?.profile_path ?? null,
+              media_type: data?.media_type ?? "person",
+              original_title:
+                data?.original_title ?? data?.original_name ?? data?.name,
+              poster_path: data?.media_type ? data?.poster_path : undefined,
+              profile_path: !data?.media_type ? data?.profile_path : undefined,
+              vote_average: data?.vote_average,
+              vote_count: data?.vote_count,
             });
       }}
     >
