@@ -39,7 +39,13 @@ export const MovieRow = ({ data, loading, title, path, isShow }: Props) => {
         <Heading lineHeight='tall' size='xs' color='white'>
           {title}
         </Heading>
-        <Tag as={ReactRouterLink} to={path} variant='solid' colorScheme='blue'>
+        <Tag
+          as={ReactRouterLink}
+          to={path}
+          variant='solid'
+          colorScheme='blue'
+          _hover={{ color: "white", bgColor: "blue.700" }}
+        >
           Explore All
         </Tag>
       </Flex>

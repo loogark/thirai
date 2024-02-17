@@ -1,6 +1,8 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link as ReactRouterLink, useLocation } from "react-router-dom";
+import { useUser } from "../context/UserProvider";
+import { AccountMenu } from "./AccountMenu";
 
 export const Header = () => {
   const [colorChange, setColorChange] = useState(false);
@@ -13,6 +15,8 @@ export const Header = () => {
   };
   window.addEventListener("scroll", changeNavbarColor);
   const location = useLocation();
+  const { getUser } = useUser();
+  const user = getUser();
 
   return (
     <Flex
@@ -84,19 +88,23 @@ export const Header = () => {
           Search
         </Box>
       </Flex>
-      <Box
-        py='6px'
-        px='8px'
-        fontSize='18px'
-        fontWeight={700}
-        color='white'
-        as={ReactRouterLink}
-        to='/signin'
-        borderRadius='6px'
-        _hover={{ bg: "#525CEB", color: "white" }}
-      >
-        Sign in
-      </Box>
+      {user ? (
+        <AccountMenu />
+      ) : (
+        <Box
+          py='6px'
+          px='8px'
+          fontSize='18px'
+          fontWeight={700}
+          color='white'
+          as={ReactRouterLink}
+          to='/signin'
+          borderRadius='6px'
+          _hover={{ bg: "#525CEB", color: "white" }}
+        >
+          Sign in
+        </Box>
+      )}
     </Flex>
   );
 };

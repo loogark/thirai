@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
+import { Account } from "./pages/Account";
 import { Auth } from "./pages/Auth";
 import { Home } from "./pages/Home";
 import { Movie } from "./pages/Movie";
@@ -50,6 +51,10 @@ export namespace Router {
         {
           path: "/search",
           element: <Search />,
+        },
+        {
+          path: "/account",
+          element: <Account />,
         },
       ],
     },

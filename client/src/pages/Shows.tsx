@@ -8,8 +8,6 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { Hero } from "../components/Hero";
 import { MovieCard } from "../components/MovieCard";
@@ -50,19 +48,6 @@ export const Shows = () => {
     fetchNextPage: nextTopRatedSeries,
     hasNextPage: hasMoreTopRatedSeries,
   } = useGetTopRatedSeries();
-
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref);
-
-  const container = {
-    hidden: { opacity: isInView ? 1 : 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
 
   return (
     <Flex
@@ -113,12 +98,6 @@ export const Shows = () => {
                 align='center'
                 wrap='wrap'
                 gap='24px'
-                ref={ref}
-                as={motion.div}
-                variants={container}
-                initial={isInView ? "show" : "hidden"}
-                whileInView='show'
-                viewport={{ once: true }}
               >
                 {popularSeries?.pages.map((res) => {
                   return res.results.map((movie: any) => (

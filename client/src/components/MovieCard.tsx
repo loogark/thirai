@@ -1,9 +1,9 @@
 import { AspectRatio, Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useIsHovered } from "../hooks/useIsHovered";
+import { Like } from "./Like";
 import { Rating } from "./Rating";
 
 interface Props {
@@ -94,9 +94,7 @@ export const MovieCard = ({ data, isShow, department }: Props) => {
             {" "}
             {data?.original_title ?? data?.original_name}
           </Text>
-          <Box cursor='pointer' mr='4px' w='fit-content' h='fit-content'>
-            <FaRegHeart color='white' />
-          </Box>
+          <Like data={data} />
         </Flex>
         {department && (
           <Text

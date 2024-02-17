@@ -1,6 +1,5 @@
 import { Flex, Input, Spinner } from "@chakra-ui/react";
-import { motion, useInView } from "framer-motion";
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { useSearchParams } from "react-router-dom";
 import { CastCard } from "../components/CastCard";
@@ -12,21 +11,7 @@ export const Search = () => {
   const newQueryParameters: URLSearchParams = new URLSearchParams();
   const searchQuery = currentQueryParameters.get("query") ?? "";
 
-  const { data, fetchNextPage, hasNextPage } = useGetSearch();
-  console.log(data);
-
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref);
-
-  const container = {
-    hidden: { opacity: isInView ? 1 : 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  const { data, fetchNextPage, hasNextPage, isLoading } = useGetSearch();
 
   const onChange: (event: ChangeEvent<HTMLInputElement>) => void = ({
     target: { value },
@@ -69,30 +54,28 @@ export const Search = () => {
         bgColor='gray.800'
         _hover={{ bgColor: "gray.700" }}
       />
-      <InfiniteScroll
-        pageStart={1}
-        loadMore={() => fetchNextPage()}
-        hasMore={hasNextPage}
-        loader={<Spinner my='24px' color='#525CEB' size='xl' />}
-      >
-        <Flex
-          direction='row'
-          justify='center'
-          align='center'
-          wrap='wrap'
-          gap='24px'
-          ref={ref}
-          as={motion.div}
-          variants={container}
-          initial={isInView ? "show" : "hidden"}
-          whileInView='show'
-          viewport={{ once: true }}
+      {isLoading ? (
+        <Spinner size='xl' color='#525CEB' />
+      ) : (
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={() => fetchNextPage()}
+          hasMore={hasNextPage}
+          loader={<Spinner my='24px' color='#525CEB' size='xl' />}
         >
-          {data?.pages.map((res) => {
-            return res.results.map((res: any) => <> {getMediaType(res)}</>);
-          })}
-        </Flex>
-      </InfiniteScroll>
+          <Flex
+            direction='row'
+            justify='center'
+            align='center'
+            wrap='wrap'
+            gap='24px'
+          >
+            {data?.pages.map((res) => {
+              return res.results.map((res: any) => <> {getMediaType(res)}</>);
+            })}
+          </Flex>
+        </InfiniteScroll>
+      )}
     </Flex>
   );
 };

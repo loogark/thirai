@@ -5,7 +5,6 @@ export const useGetTopRatedMovies = () => {
   const query = useInfiniteQuery(
     ["top-rated-movies"],
     async ({ pageParam = 1 }) => {
-      console.log(pageParam, "pageParam");
       const response = await API.get(`api/movie/toprated/${pageParam}`);
       return { ...response.data, nextCursor: pageParam + 1 };
     },

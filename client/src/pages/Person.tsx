@@ -24,7 +24,6 @@ import { useGetPerson } from "../hooks/api/useGetPerson";
 export const Person = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetPerson(id!);
-  console.log(data, isLoading);
 
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);

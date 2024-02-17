@@ -23,6 +23,28 @@ interface Props {
 export const Hero = ({ data, loading, status, isClickable }: Props) => {
   const navigate = useNavigate();
   const pathType = data?.media_type === "tv" ? "show" : "movie";
+
+  function getHoursAndMinutes(totalMinutes: number) {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    if (!totalMinutes) return undefined;
+    if (!hours && minutes) return `${minutes}m`;
+    if (hours && !minutes) return `${hours}h`;
+    if (hours && minutes) return `${hours}h ${minutes}m`;
+  }
+
+  function getYearFromDate(dateString: string) {
+    // Parse the date string
+    const dateObject = new Date(dateString);
+
+    // Extract the year
+    const year = dateObject.getFullYear();
+
+    // Return the year
+    return year;
+  }
+
   if (loading) return <HeroLoader />;
 
   return (
@@ -71,9 +93,12 @@ export const Hero = ({ data, loading, status, isClickable }: Props) => {
           zIndex={1}
           gap={2}
         >
-          <Heading textAlign='start' as='h1' size='xl' color='white'>
-            {data?.original_title ?? data?.original_name}
-          </Heading>
+          <HStack gap='2' align='center' justify='center'>
+            <Heading textAlign='start' as='h1' size='xl' color='white'>
+              {data?.original_title ?? data?.original_name}{" "}
+              {data?.release_date && `(${getYearFromDate(data?.release_date)})`}
+            </Heading>
+          </HStack>
           <HStack gap='2' mr='4px'>
             {data?.genres?.map((genre: Record<string, any>) => (
               <Tag variant='solid' colorScheme='blue' key={genre.id}>
@@ -90,6 +115,9 @@ export const Hero = ({ data, loading, status, isClickable }: Props) => {
           <HStack gap='2'>
             <Rating value={Math.round(data?.vote_average * 10) / 10} />
             <Text color='white'>{`(${data?.vote_count})`}</Text>
+            {getHoursAndMinutes !== undefined && (
+              <Text color='white'>{getHoursAndMinutes(data?.runtime)}</Text>
+            )}
           </HStack>
         </Flex>
 

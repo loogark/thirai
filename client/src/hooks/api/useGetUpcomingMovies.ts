@@ -5,7 +5,6 @@ export const useGetUpcomingMovies = () => {
   const query = useInfiniteQuery(
     ["upcoming-movies"],
     async ({ pageParam = 1 }) => {
-      console.log(pageParam, "pageParam");
       const response = await API.get(`api/movie/upcoming/${pageParam}`);
       return { ...response.data, nextCursor: pageParam + 1 };
     },

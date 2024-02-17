@@ -1,9 +1,9 @@
-import { AspectRatio, Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
+import { AspectRatio, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { useIsHovered } from "../hooks/useIsHovered";
+import { Like } from "./Like";
 
 interface Props {
   data: Record<string, any>;
@@ -84,9 +84,7 @@ export const CrewCard = ({ data }: Props) => {
             {`department: ${data?.department}`}
           </Text>
         </VStack>
-        <Box cursor='pointer' mr='4px' w='fit-content' h='fit-content'>
-          <FaRegHeart color='white' />
-        </Box>
+        <Like data={data} />
       </Flex>
     </Flex>
   );
