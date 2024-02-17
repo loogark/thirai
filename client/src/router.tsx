@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { Movie } from "./pages/Movie";
 import { Movies } from "./pages/Movies";
 import { Person } from "./pages/Person";
+import { Search } from "./pages/Search";
 import { Show } from "./pages/Show";
 import { Shows } from "./pages/Shows";
 
@@ -45,6 +46,10 @@ export namespace Router {
         {
           path: "/person/:id",
           element: <Person />,
+        },
+        {
+          path: "/search",
+          element: <Search />,
         },
       ],
     },

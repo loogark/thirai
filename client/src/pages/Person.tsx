@@ -43,6 +43,12 @@ export const Person = () => {
     (value: Record<string, any>, index: number, self: any) =>
       index === self.findIndex((t: Record<string, any>) => t?.id === value?.id)
   );
+  const removeDuplicateCrew = data?.combined_credits?.crew.filter(
+    (value: Record<string, any>, index: number, self: any) =>
+      index === self.findIndex((t: Record<string, any>) => t?.id === value?.id)
+  );
+
+  const hasNoImages = data?.images?.profiles?.length === 0;
 
   useEffect(() => {
     window.scrollTo({
@@ -133,26 +139,20 @@ export const Person = () => {
         <TabPanels>
           <TabPanel>
             <Flex
-              my='24px'
-              direction='column'
-              justify='flex-start'
-              alignItems='flex-start'
-              gap='8px'
+              direction='row'
+              justify={"center"}
+              align='center'
+              wrap='wrap'
+              gap='24px'
+              ref={ref}
+              as={motion.div}
+              variants={container}
+              initial={isInView ? "show" : "hidden"}
+              whileInView='show'
+              viewport={{ once: true }}
             >
-              <Flex
-                direction='row'
-                justify='center'
-                align='center'
-                wrap='wrap'
-                gap='24px'
-                ref={ref}
-                as={motion.div}
-                variants={container}
-                initial={isInView ? "show" : "hidden"}
-                whileInView='show'
-                viewport={{ once: true }}
-              >
-                {removeDuplicateCasts?.map((res: any) => {
+              {removeDuplicateCasts?.length ? (
+                removeDuplicateCasts?.map((res: any) => {
                   return (
                     <MovieCard
                       isShow={res?.media_type === "tv"}
@@ -160,63 +160,85 @@ export const Person = () => {
                       data={res}
                     />
                   );
-                })}
-              </Flex>
-            </Flex>
-          </TabPanel>
-          <TabPanel>
-            <Flex direction='column' gap='8px'>
-              <Heading lineHeight='tall' size='xs' color='white'>
-                {" "}
-                Backdrops
-              </Heading>
+                })
+              ) : (
+                <Heading my='16px' color='gray.500' size='sm'>
+                  Sorry, no acting roles found
+                </Heading>
+              )}
             </Flex>
           </TabPanel>
           <TabPanel>
             <Flex
-              direction='column'
-              align='flex-start'
-              justify='flex-start'
-              gap='8px'
-              p='24px'
+              direction='row'
+              justify={"center"}
+              align='center'
+              wrap='wrap'
+              gap='24px'
+              ref={ref}
+              as={motion.div}
+              variants={container}
+              initial={isInView ? "show" : "hidden"}
+              whileInView='show'
+              viewport={{ once: true }}
             >
-              <Heading lineHeight='tall' size='xs' color='white'>
-                {" "}
-                Similar Movies
-              </Heading>
-              <Flex
-                direction='row'
-                justify='center'
-                align='center'
-                wrap='wrap'
-                gap='24px'
-                ref={ref}
-                as={motion.div}
-                variants={container}
-                initial={isInView ? "show" : "hidden"}
-                whileInView='show'
-                viewport={{ once: true }}
-              >
-                {console.log(
-                  data?.combined_credits?.cast.filter(
-                    (value: Record<string, any>, index: number, self: any) =>
-                      index ===
-                      self.findIndex(
-                        (t: Record<string, any>) => t?.id === value?.id
-                      )
-                  ),
-                  "filetered"
-                )}
-                {removeDuplicateCasts?.map((res: any) => {
+              {removeDuplicateCrew?.length ? (
+                removeDuplicateCrew?.map((res: any) => {
                   return (
                     <MovieCard
-                      isShow={data?.media_type === "show"}
-                      key={res.id}
+                      isShow={res?.media_type === "tv"}
+                      key={res?.id}
                       data={res}
+                      department={res?.department}
                     />
                   );
-                })}
-              </Flex>
+                })
+              ) : (
+                <Heading my='16px' color='gray.500' size='sm'>
+                  Sorry, no crew roles found
+                </Heading>
+              )}
+            </Flex>
+          </TabPanel>
+          <TabPanel>
+            <Flex
+              direction='row'
+              justify='center'
+              align='center'
+              wrap='wrap'
+              gap={4}
+            >
+              {!hasNoImages ? (
+                data?.images?.profiles?.map((image: any) => (
+                  <Flex
+                    w='fit-content'
+                    h='100%'
+                    bg='rgb(19, 19, 19)'
+                    key={image.file_path}
+                  >
+                    <AspectRatio
+                      position='relative'
+                      w={image?.width}
+                      cursor='pointer'
+                      h='fit-content'
+                      maxW='400px'
+                      ratio={image?.aspect_ratio}
+                    >
+                      <Image
+                        src={`https://image.tmdb.org/t/p/w500${image.file_path}`}
+                        alt={image.file_path}
+                        w='100%'
+                        h='100%'
+                        objectFit='cover'
+                      />
+                    </AspectRatio>
+                  </Flex>
+                ))
+              ) : (
+                <Heading my='16px' color='gray.500' size='sm'>
+                  Sorry, no Photos found
+                </Heading>
+              )}
             </Flex>
           </TabPanel>
         </TabPanels>

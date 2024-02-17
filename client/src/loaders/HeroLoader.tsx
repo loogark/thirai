@@ -1,4 +1,4 @@
-import { Box, SkeletonText } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 
 export const HeroLoader = () => {
   return (
@@ -12,13 +12,15 @@ export const HeroLoader = () => {
         bgImage='linear-gradient(to right, rgb(0, 0, 0), rgba(0, 0, 0, 0))'
       ></Box>
       <Box
+        left='50%'
+        top='50%'
+        transform='translate(-50%, -50%)'
         zIndex={1}
         position='absolute'
-        bottom={"90px"}
         w='100%'
         h='fit-content'
       >
-        <SkeletonText mt='4' noOfLines={3} spacing='4' skeletonHeight='3' />
+        <Spinner size='xl' color='#525CEB' />
       </Box>
       <Box
         width='100%'

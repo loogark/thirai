@@ -9,6 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { HeroLoader } from "../loaders/HeroLoader";
 import { Rating } from "./Rating";
 
@@ -16,9 +17,12 @@ interface Props {
   data: Record<string, any>;
   loading: boolean;
   status?: string;
+  isClickable?: boolean;
 }
 
-export const Hero = ({ data, loading, status }: Props) => {
+export const Hero = ({ data, loading, status, isClickable }: Props) => {
+  const navigate = useNavigate();
+  const pathType = data?.media_type === "tv" ? "show" : "movie";
   if (loading) return <HeroLoader />;
 
   return (
@@ -35,6 +39,8 @@ export const Hero = ({ data, loading, status }: Props) => {
         h='90vh'
         overflow='hidden'
         position='relative'
+        cursor={isClickable ? "pointer" : "auto"}
+        onClick={() => isClickable && navigate(`/${pathType}/${data?.id}`)}
       >
         <AspectRatio ratio={16 / 9} w='100%' overflow='hidden'>
           <Image

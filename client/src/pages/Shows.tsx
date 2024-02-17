@@ -73,7 +73,7 @@ export const Shows = () => {
       h='100%'
       gap={8}
     >
-      <Hero data={data} loading={isLoading} />
+      <Hero data={data} loading={isLoading} isClickable />
 
       <Tabs variant='soft-rounded' isLazy w={"100%"}>
         <TabList>

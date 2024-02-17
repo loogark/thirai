@@ -76,7 +76,9 @@ export const Movie = () => {
               </Tab>
               <Tab _selected={{ color: "white", bg: "#525CEB" }}>Media </Tab>
               <Tab _selected={{ color: "white", bg: "#525CEB" }}>Reviews</Tab>
-              <Tab _selected={{ color: "white", bg: "#525CEB" }}>Similar</Tab>
+              <Tab _selected={{ color: "white", bg: "#525CEB" }}>
+                Similar Movies
+              </Tab>
             </Flex>
           </Flex>
         </TabList>
@@ -156,33 +158,21 @@ export const Movie = () => {
           </TabPanel>
           <TabPanel>
             <Flex
-              direction='column'
-              align='flex-start'
-              justify='flex-start'
-              gap='8px'
-              p='24px'
+              direction='row'
+              justify='center'
+              align='center'
+              wrap='wrap'
+              gap='24px'
+              ref={ref}
+              as={motion.div}
+              variants={container}
+              initial={isInView ? "show" : "hidden"}
+              whileInView='show'
+              viewport={{ once: true }}
             >
-              <Heading lineHeight='tall' size='xs' color='white'>
-                {" "}
-                Similar Movies
-              </Heading>
-              <Flex
-                direction='row'
-                justify='center'
-                align='center'
-                wrap='wrap'
-                gap='24px'
-                ref={ref}
-                as={motion.div}
-                variants={container}
-                initial={isInView ? "show" : "hidden"}
-                whileInView='show'
-                viewport={{ once: true }}
-              >
-                {data?.similar?.results.map((res: any) => {
-                  return <MovieCard key={res.id} data={res} />;
-                })}
-              </Flex>
+              {data?.similar?.results.map((res: any) => {
+                return <MovieCard key={res.id} data={res} />;
+              })}
             </Flex>
           </TabPanel>
         </TabPanels>

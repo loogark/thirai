@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink, useLocation } from "react-router-dom";
 
 export const Header = () => {
   const [colorChange, setColorChange] = useState(false);
@@ -12,6 +12,7 @@ export const Header = () => {
     }
   };
   window.addEventListener("scroll", changeNavbarColor);
+  const location = useLocation();
 
   return (
     <Flex
@@ -48,6 +49,7 @@ export const Header = () => {
           color='white'
           as={ReactRouterLink}
           to='/movies'
+          bg={location.pathname.includes("/movie") ? "#525CEB" : "transparent"}
           borderRadius='6px'
           _hover={{ bg: "#525CEB", color: "white" }}
         >
@@ -61,6 +63,7 @@ export const Header = () => {
           color='white'
           as={ReactRouterLink}
           to='/shows'
+          bg={location.pathname.includes("/show") ? "#525CEB" : "transparent"}
           borderRadius='6px'
           _hover={{ bg: "#525CEB", color: "white" }}
         >
@@ -74,6 +77,7 @@ export const Header = () => {
           color='white'
           as={ReactRouterLink}
           to='/search'
+          bg={location.pathname.includes("/search") ? "#525CEB" : "transparent"}
           borderRadius='6px'
           _hover={{ bg: "#525CEB", color: "white" }}
         >

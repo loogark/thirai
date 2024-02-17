@@ -56,9 +56,9 @@ export const CastRow = ({ data, loading, isCrew, title }: Props) => {
       >
         {data?.map((movie: any) =>
           isCrew ? (
-            <CrewCard key={data.id} data={movie} />
+            <CrewCard key={data?.id} data={movie} />
           ) : (
-            <CastCard key={data.id} data={movie} />
+            <CastCard key={data?.name} data={movie} />
           )
         )}
       </Flex>

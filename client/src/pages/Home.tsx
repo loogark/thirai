@@ -20,7 +20,7 @@ export const Home = () => {
       h='100%'
       gap={8}
     >
-      <Hero data={data} loading={isLoading} />
+      <Hero data={data} loading={isLoading} isClickable />
       <Box p='24px' as='section' w='100%' h='fit-content'>
         <MovieRow
           title='Trending Movies'

@@ -24,6 +24,11 @@ export const userCollection = new Schema(
       type: String,
       required: true,
     },
+    imagePath: {
+      type: String,
+      required: true,
+      nullable: true,
+    },
   },
   { timestamps: true }
 );

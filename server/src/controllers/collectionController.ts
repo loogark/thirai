@@ -16,7 +16,7 @@ export const allCollection = async (req: any, res: any) => {
 
 // Add collection
 export const addCollection = async (req: any, res: any) => {
-  const { mediaId, title, mediaType, saveType, userId } = req.body;
+  const { mediaId, title, mediaType, saveType, userId, imagePath } = req.body;
 
   try {
     const singleItem = await Collection.create({
@@ -25,6 +25,7 @@ export const addCollection = async (req: any, res: any) => {
       mediaType,
       saveType,
       userId,
+      imagePath,
     });
     res.status(200).json({ singleItem });
   } catch (error: any) {

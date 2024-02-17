@@ -27,6 +27,9 @@ export const Show = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
 
+  const noSimilarShows = data?.similar?.results.length === 0;
+  console.log(data);
+
   useEffect(() => {
     return () => {
       setTabIndex(0);
@@ -77,7 +80,9 @@ export const Show = () => {
               </Tab>
               <Tab _selected={{ color: "white", bg: "#525CEB" }}>Media </Tab>
               <Tab _selected={{ color: "white", bg: "#525CEB" }}>Reviews</Tab>
-              <Tab _selected={{ color: "white", bg: "#525CEB" }}>Similar</Tab>
+              <Tab _selected={{ color: "white", bg: "#525CEB" }}>
+                Similar Shows
+              </Tab>
             </Flex>
           </Flex>
         </TabList>
@@ -113,10 +118,10 @@ export const Show = () => {
           </TabPanel>
           <TabPanel>
             <Flex direction='column' gap='8px' p='24px'>
-              {data?.images?.posters && data?.image?.posters.length && (
+              {data?.images?.posters && data?.images?.posters.length && (
                 <PosterRow data={data?.images?.posters} loading={isLoading} />
               )}
-              {data?.images?.backdrops && data?.image?.backdrops.length && (
+              {data?.images?.backdrops && data?.images?.backdrops.length && (
                 <Flex
                   my='24px'
                   direction='column'
@@ -163,12 +168,12 @@ export const Show = () => {
                   </Flex>
                 </Flex>
               )}
-              {(!data?.images?.posters || !data?.image?.posters.length) &&
+              {(!data?.images?.posters || !data?.images?.posters.length) &&
                 (!data?.images?.backdrops ||
-                  !data?.image?.backdrops.length) && (
+                  !data?.images?.backdrops.length) && (
                   <Box width='100%'>
-                    <Heading color='white' mx='auto' size='md' as={"h5"}>
-                      Sorry, No Media found
+                    <Heading my='16px' color='gray.500' size='sm'>
+                      Sorry, No media found
                     </Heading>
                   </Box>
                 )}
@@ -184,33 +189,27 @@ export const Show = () => {
           </TabPanel>
           <TabPanel>
             <Flex
-              direction='column'
-              align='flex-start'
-              justify='flex-start'
-              gap='8px'
-              p='24px'
+              direction='row'
+              justify='center'
+              align='center'
+              wrap='wrap'
+              gap='24px'
+              ref={ref}
+              as={motion.div}
+              variants={container}
+              initial={isInView ? "show" : "hidden"}
+              whileInView='show'
+              viewport={{ once: true }}
             >
-              <Heading lineHeight='tall' size='xs' color='white'>
-                {" "}
-                Similar Shows
-              </Heading>
-              <Flex
-                direction='row'
-                justify='center'
-                align='center'
-                wrap='wrap'
-                gap='24px'
-                ref={ref}
-                as={motion.div}
-                variants={container}
-                initial={isInView ? "show" : "hidden"}
-                whileInView='show'
-                viewport={{ once: true }}
-              >
-                {data?.similar?.results.map((res: any) => {
+              {!noSimilarShows ? (
+                data?.similar?.results.map((res: any) => {
                   return <MovieCard isShow key={res.id} data={res} />;
-                })}
-              </Flex>
+                })
+              ) : (
+                <Heading my='16px' color='gray.500' size='sm'>
+                  Sorry, no similar shows found
+                </Heading>
+              )}
             </Flex>
           </TabPanel>
         </TabPanels>

@@ -1,4 +1,4 @@
-import { AspectRatio, Box, Flex, Image, Text } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
@@ -9,9 +9,10 @@ import { Rating } from "./Rating";
 interface Props {
   data: Record<string, any>;
   isShow?: boolean;
+  department?: string;
 }
 
-export const MovieCard = ({ data, isShow }: Props) => {
+export const MovieCard = ({ data, isShow, department }: Props) => {
   const [parentRef, setParentRef] = useState<HTMLDivElement | null>(null);
   const isHovered = useIsHovered([parentRef]).some(Boolean);
 
@@ -80,22 +81,36 @@ export const MovieCard = ({ data, isShow }: Props) => {
           )}
         </>
       </AspectRatio>
-      <Flex direction='row' w='100%' justify='space-between' align='center'>
-        <Text
-          textAlign='start'
-          noOfLines={1}
-          color='white'
-          fontSize='sm'
-          fontWeight='bold'
-          m='2'
-        >
-          {" "}
-          {data?.original_title ?? data?.original_name}
-        </Text>
-        <Box cursor='pointer' mr='4px' w='fit-content' h='fit-content'>
-          <FaRegHeart color='white' />
-        </Box>
-      </Flex>
+      <VStack my='2' justify='start' align='start' spacing={0}>
+        <Flex direction='row' w='100%' justify='space-between' align='center'>
+          <Text
+            textAlign='start'
+            noOfLines={1}
+            color='white'
+            fontSize='sm'
+            fontWeight='bold'
+            mx='2'
+          >
+            {" "}
+            {data?.original_title ?? data?.original_name}
+          </Text>
+          <Box cursor='pointer' mr='4px' w='fit-content' h='fit-content'>
+            <FaRegHeart color='white' />
+          </Box>
+        </Flex>
+        {department && (
+          <Text
+            textAlign='start'
+            noOfLines={1}
+            color='gray.600'
+            fontSize='sm'
+            fontWeight='bold'
+            mx='2'
+          >
+            {`department : ${department}`}
+          </Text>
+        )}
+      </VStack>
     </Flex>
   );
 };
