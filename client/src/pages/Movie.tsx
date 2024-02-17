@@ -9,8 +9,7 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CastRow } from "../components/CastRow";
 import { Hero } from "../components/Hero";
@@ -23,24 +22,11 @@ export const Movie = () => {
   const { data, isLoading } = useGetMovie(id!);
   const [tabIndex, setTabIndex] = useState(0);
 
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref);
-
   useEffect(() => {
     return () => {
       setTabIndex(0);
     };
   }, [id]);
-
-  const container = {
-    hidden: { opacity: isInView ? 1 : 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
 
   return (
     <Flex
@@ -163,12 +149,6 @@ export const Movie = () => {
               align='center'
               wrap='wrap'
               gap='24px'
-              ref={ref}
-              as={motion.div}
-              variants={container}
-              initial={isInView ? "show" : "hidden"}
-              whileInView='show'
-              viewport={{ once: true }}
             >
               {data?.similar?.results.map((res: any) => {
                 return <MovieCard key={res.id} data={res} />;

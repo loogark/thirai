@@ -10,8 +10,8 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CastRow } from "../components/CastRow";
 import { Hero } from "../components/Hero";
@@ -24,9 +24,6 @@ export const Show = () => {
   const { data, isLoading } = useGetSeries(id!);
   const [tabIndex, setTabIndex] = useState(0);
 
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref);
-
   const noSimilarShows = data?.similar?.results.length === 0;
   console.log(data);
 
@@ -35,16 +32,6 @@ export const Show = () => {
       setTabIndex(0);
     };
   }, [id]);
-
-  const container = {
-    hidden: { opacity: isInView ? 1 : 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
 
   return (
     <Flex
@@ -194,10 +181,7 @@ export const Show = () => {
               align='center'
               wrap='wrap'
               gap='24px'
-              ref={ref}
               as={motion.div}
-              variants={container}
-              initial={isInView ? "show" : "hidden"}
               whileInView='show'
               viewport={{ once: true }}
             >

@@ -13,8 +13,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { LiaImdb } from "react-icons/lia";
 import { RiFacebookFill, RiInstagramFill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
@@ -24,19 +23,6 @@ import { useGetPerson } from "../hooks/api/useGetPerson";
 export const Person = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetPerson(id!);
-
-  const ref = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(ref);
-
-  const container = {
-    hidden: { opacity: isInView ? 1 : 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
 
   const removeDuplicateCasts = data?.combined_credits?.cast.filter(
     (value: Record<string, any>, index: number, self: any) =>
@@ -143,12 +129,6 @@ export const Person = () => {
               align='center'
               wrap='wrap'
               gap='24px'
-              ref={ref}
-              as={motion.div}
-              variants={container}
-              initial={isInView ? "show" : "hidden"}
-              whileInView='show'
-              viewport={{ once: true }}
             >
               {removeDuplicateCasts?.length ? (
                 removeDuplicateCasts?.map((res: any) => {
@@ -174,12 +154,6 @@ export const Person = () => {
               align='center'
               wrap='wrap'
               gap='24px'
-              ref={ref}
-              as={motion.div}
-              variants={container}
-              initial={isInView ? "show" : "hidden"}
-              whileInView='show'
-              viewport={{ once: true }}
             >
               {removeDuplicateCrew?.length ? (
                 removeDuplicateCrew?.map((res: any) => {
