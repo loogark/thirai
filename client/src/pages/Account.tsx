@@ -122,9 +122,6 @@ export const Account = () => {
             justifyContent='space-between'
             align='center'
           >
-            <Heading lineHeight='tall' size='xs' color='white'>
-              Movies
-            </Heading>
             <Flex direction='row' justify='center' align='center' gap='4px'>
               {LocalTabList?.map((tab) => (
                 <Tab
@@ -139,44 +136,63 @@ export const Account = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Flex
-              direction='row'
-              justify='center'
-              align='center'
-              wrap='wrap'
-              gap='24px'
-            >
-              {collectedMovies?.map((movie: any) => (
-                <MovieCard key={movie?.name} data={movie} />
-              ))}
-              ;
-            </Flex>
+            {collectedMovies?.length ? (
+              <Flex
+                direction='row'
+                justify='center'
+                align='center'
+                wrap='wrap'
+                gap='24px'
+              >
+                {collectedMovies?.map((movie: any) => (
+                  <MovieCard key={movie?.name} data={movie} />
+                ))}
+                ;
+              </Flex>
+            ) : (
+              <Heading my='16px' color='gray.500' size='sm'>
+                No Movies added to the collection
+              </Heading>
+            )}
           </TabPanel>
           <TabPanel>
-            <Flex
-              direction='row'
-              justify='center'
-              align='center'
-              wrap='wrap'
-              gap='24px'
-            >
-              {collectedShows?.map((movie: any) => (
-                <MovieCard isShow key={movie?.id} data={movie} />
-              ))}
-            </Flex>
+            {collectedShows?.length ? (
+              <Flex
+                direction='row'
+                justify='center'
+                align='center'
+                wrap='wrap'
+                gap='24px'
+              >
+                {collectedShows?.map((movie: any) => (
+                  <MovieCard isShow key={movie?.id} data={movie} />
+                ))}
+              </Flex>
+            ) : (
+              <Heading my='16px' color='gray.500' size='sm'>
+                No Tv Shows added to the collection
+              </Heading>
+            )}
           </TabPanel>
           <TabPanel>
-            <Flex
-              direction='row'
-              justify='center'
-              align='center'
-              wrap='wrap'
-              gap='24px'
-            >
-              {collectedPersons?.map((movie: any) => (
-                <CastCard key={movie?.name} data={movie} />
-              ))}
-            </Flex>
+            {collectedPersons?.length ? (
+              <Flex
+                direction='row'
+                justify='center'
+                align='center'
+                wrap='wrap'
+                gap='24px'
+              >
+                {collectedPersons?.map((movie: any) => (
+                  <CastCard key={movie?.name} data={movie} />
+                ))}
+              </Flex>
+            ) : (
+              <Heading my='16px' color='gray.500' size='sm'>
+                {" "}
+                No Persons added to the collection
+              </Heading>
+            )}
           </TabPanel>
         </TabPanels>
       </Tabs>
