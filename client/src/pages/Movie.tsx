@@ -3,12 +3,14 @@ import {
   Flex,
   Heading,
   Image,
+  Spinner,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroller";
 import { useParams } from "react-router-dom";
 import { CastRow } from "../components/CastRow";
 import { Hero } from "../components/Hero";
@@ -22,9 +24,12 @@ export const Movie = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetMovie(id!);
 
-  const { data: reviewData, isLoading: reviewLoading } = useGetMovieReviews(
-    id!
-  );
+  const {
+    data: reviewData,
+    isLoading: reviewLoading,
+    fetchNextPage,
+    hasNextPage,
+  } = useGetMovieReviews(id!);
 
   return (
     <Flex
@@ -145,8 +150,15 @@ export const Movie = () => {
             </Flex>
           </TabPanel>
           <TabPanel>
-            <Review data={reviewData} loading={reviewLoading} />
+            <InfiniteScroll
+              loadMore={() => fetchNextPage()}
+              hasMore={hasNextPage ?? false}
+              loader={<Spinner my='24px' color='#525CEB' size='xl' />}
+            >
+              <Review data={reviewData} loading={reviewLoading} />
+            </InfiniteScroll>
           </TabPanel>
+
           <TabPanel>
             <Flex
               direction='row'

@@ -10,9 +10,16 @@ export const useGetSearch = () => {
     ["search-results", searchQuery],
     async ({ pageParam = 1 }) => {
       const response = await API.get(`api/search/${searchQuery}/${pageParam}`);
-      return { ...response.data, nextCursor: pageParam + 1 };
+      return {
+        ...response.data,
+        nextCursor:
+          response?.data?.page === response?.data?.total_pages
+            ? null
+            : response?.data.page + 1,
+      };
     },
     {
+      enabled: searchQuery !== null && searchQuery !== "",
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
@@ -20,5 +27,8 @@ export const useGetSearch = () => {
     }
   );
 
-  return query;
+  return {
+    ...query,
+    isLoading: query.isLoading && query.fetchStatus !== "idle",
+  };
 };

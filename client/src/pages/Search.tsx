@@ -1,9 +1,11 @@
-import { Flex, Input, Spinner } from "@chakra-ui/react";
-import { ChangeEvent } from "react";
+import { Flex, Heading, Input, Spinner } from "@chakra-ui/react";
+import { ChangeEvent, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { useSearchParams } from "react-router-dom";
+import { SearchAssets } from "../assets/SearchAssets";
 import { CastCard } from "../components/CastCard";
 import { MovieCard } from "../components/MovieCard";
+import { useDebounce } from "../hooks/api/useDebounce";
 import { useGetSearch } from "../hooks/api/useGetSearch";
 
 export const Search = () => {
@@ -13,13 +15,18 @@ export const Search = () => {
 
   const { data, fetchNextPage, hasNextPage, isLoading } = useGetSearch();
 
-  const onChange: (event: ChangeEvent<HTMLInputElement>) => void = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>): void => {
-    if (value) newQueryParameters.set("query", value);
+  const [value, setValue] = useState<string>(searchQuery ?? "");
+  const debouncedValue = useDebounce<string>(value, 500);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  useEffect(() => {
+    if (value !== "") newQueryParameters.set("query", value);
 
     setSearchParams(newQueryParameters);
-  };
+  }, [debouncedValue]);
 
   const getMediaType = (data: Record<string, any>) => {
     const { media_type } = data;
@@ -30,7 +37,6 @@ export const Search = () => {
         return <CastCard key={data.id} data={data} />;
       default:
         return <MovieCard key={data.id} data={data} />;
-        break;
     }
   };
 
@@ -45,8 +51,8 @@ export const Search = () => {
       mt='120px'
     >
       <Input
-        value={searchQuery}
-        onChange={onChange}
+        value={value}
+        onChange={handleChange}
         color='white'
         w='70vw'
         variant='filled'
@@ -58,9 +64,8 @@ export const Search = () => {
         <Spinner size='xl' color='#525CEB' />
       ) : (
         <InfiniteScroll
-          pageStart={1}
           loadMore={() => fetchNextPage()}
-          hasMore={hasNextPage}
+          hasMore={hasNextPage ?? false}
           loader={<Spinner my='24px' color='#525CEB' size='xl' />}
         >
           <Flex
@@ -75,6 +80,16 @@ export const Search = () => {
             })}
           </Flex>
         </InfiniteScroll>
+      )}
+      {data?.pages[0].results.length === 0 && (
+        <Heading my='16px' color='gray.500' size='sm'>
+          No results found
+        </Heading>
+      )}
+      {!isLoading && !searchQuery && (
+        <Flex maxW='380px' h='300px' justify='start' align='center'>
+          <SearchAssets />{" "}
+        </Flex>
       )}
     </Flex>
   );

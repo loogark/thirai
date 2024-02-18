@@ -11,9 +11,9 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
+import { UserImage } from "../assets/UserImage";
 import { CastCard } from "../components/CastCard";
 import { MovieCard } from "../components/MovieCard";
-import { UserImage } from "../components/UserImage";
 import { useUser } from "../context/UserProvider";
 import { useGetCollection } from "../hooks/api/useGetCollection";
 
