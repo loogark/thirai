@@ -21,6 +21,8 @@ export const PosterRow = ({ data }: Props) => {
     },
   };
 
+  if (!data?.length) return null;
+
   return (
     <Flex
       gap={4}

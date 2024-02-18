@@ -25,6 +25,8 @@ export const CastRow = ({ data, loading, isCrew, title }: Props) => {
     },
   };
 
+  if (!data) return null;
+
   return (
     <Flex
       gap={4}

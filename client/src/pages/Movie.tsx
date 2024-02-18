@@ -63,67 +63,85 @@ export const Movie = () => {
         <TabPanels>
           <TabPanel>
             <Flex p='24px' direction='column' gap='24px'>
-              <CastRow
-                title='Cast'
-                data={data?.casts?.cast}
-                loading={isLoading}
-              />
-              <CastRow
-                title='crew'
-                data={data?.casts?.crew}
-                loading={isLoading}
-                isCrew
-              />
+              {data?.casts?.cast?.length && (
+                <CastRow
+                  title='Cast'
+                  data={data?.casts?.cast}
+                  loading={isLoading}
+                />
+              )}
+              {data?.casts?.crew?.length && (
+                <CastRow
+                  title='crew'
+                  data={data?.casts?.crew}
+                  loading={isLoading}
+                  isCrew
+                />
+              )}
+              {!data?.casts?.cast?.length && !data?.casts?.crew?.length && (
+                <Heading my='16px' color='gray.500' size='sm'>
+                  Sorry, no Cast or Crew details available
+                </Heading>
+              )}
             </Flex>
           </TabPanel>
           <TabPanel>
             <Flex direction='column' gap='8px' p='24px'>
               <PosterRow data={data?.images?.posters} loading={isLoading} />
-              <Flex
-                my='24px'
-                direction='column'
-                justify='flex-start'
-                alignItems='flex-start'
-                gap='8px'
-              >
-                <Heading lineHeight='tall' size='xs' color='white'>
-                  {" "}
-                  Backdrops
-                </Heading>
+              {data?.images?.backdrops.length && (
                 <Flex
-                  direction='row'
-                  justify='center'
-                  align='center'
-                  wrap='wrap'
-                  gap={4}
+                  my='24px'
+                  direction='column'
+                  justify='flex-start'
+                  alignItems='flex-start'
+                  gap='8px'
                 >
-                  {data?.images?.backdrops?.map((backdrop: any) => (
-                    <Flex
-                      w='fit-content'
-                      h='100%'
-                      bg='rgb(19, 19, 19)'
-                      key={backdrop.file_path}
-                    >
-                      <AspectRatio
-                        position='relative'
-                        w={backdrop?.width}
-                        cursor='pointer'
-                        h='fit-content'
-                        maxW='400px'
-                        ratio={backdrop?.aspect_ratio}
+                  <Heading lineHeight='tall' size='xs' color='white'>
+                    {" "}
+                    Backdrops
+                  </Heading>
+                  <Flex
+                    direction='row'
+                    justify='center'
+                    align='center'
+                    wrap='wrap'
+                    gap={4}
+                  >
+                    {data?.images?.backdrops?.map((backdrop: any) => (
+                      <Flex
+                        w='fit-content'
+                        h='100%'
+                        bg='rgb(19, 19, 19)'
+                        key={backdrop.file_path}
                       >
-                        <Image
-                          src={`https://image.tmdb.org/t/p/w500${backdrop.file_path}`}
-                          alt={backdrop.file_path}
-                          w='100%'
-                          h='100%'
-                          objectFit='cover'
-                        />
-                      </AspectRatio>
-                    </Flex>
-                  ))}
+                        <AspectRatio
+                          position='relative'
+                          w={backdrop?.width}
+                          cursor='pointer'
+                          h='fit-content'
+                          maxW='400px'
+                          ratio={backdrop?.aspect_ratio}
+                        >
+                          <Image
+                            src={`https://image.tmdb.org/t/p/w500${backdrop.file_path}`}
+                            alt={backdrop.file_path}
+                            w='100%'
+                            h='100%'
+                            objectFit='cover'
+                          />
+                        </AspectRatio>
+                      </Flex>
+                    ))}
+                  </Flex>
                 </Flex>
-              </Flex>
+              )}
+              {(!data?.images?.posters || !data?.images?.posters?.length) &&
+                (!data?.images?.backdrops ||
+                  !data?.images?.backdrops?.length) && (
+                  <Heading color='gray.500' size='sm'>
+                    Sorry, no media available
+                  </Heading>
+                )}
             </Flex>
           </TabPanel>
           <TabPanel>
@@ -141,6 +159,11 @@ export const Movie = () => {
                 return <MovieCard key={res.id} data={res} />;
               })}
             </Flex>
+            {!data?.similar?.results?.length && (
+              <Heading my='24px' color='gray.500' size='sm'>
+                Sorry, no similar movies found
+              </Heading>
+            )}
           </TabPanel>
         </TabPanels>
       </Tabs>
