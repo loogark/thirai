@@ -2,6 +2,7 @@ import { Flex, Heading, Input, Spinner } from "@chakra-ui/react";
 import { ChangeEvent, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import { useSearchParams } from "react-router-dom";
+import { NothingFound } from "../assets/NothingFound";
 import { SearchAssets } from "../assets/SearchAssets";
 import { CastCard } from "../components/CastCard";
 import { MovieCard } from "../components/MovieCard";
@@ -82,9 +83,19 @@ export const Search = () => {
         </InfiniteScroll>
       )}
       {data?.pages[0].results.length === 0 && (
-        <Heading my='16px' color='gray.500' size='sm'>
-          No results found
-        </Heading>
+        <Flex
+          maxW='380px'
+          h='300px'
+          direction='column'
+          justify='center'
+          align='center'
+          gap={"8px"}
+        >
+          <NothingFound />
+          <Heading my='16px' color='gray.500' size='sm'>
+            No results found
+          </Heading>
+        </Flex>
       )}
       {!isLoading && !searchQuery && (
         <Flex maxW='380px' h='300px' justify='start' align='center'>
