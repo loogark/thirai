@@ -2,6 +2,8 @@ import { Box, Spinner } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useAuthModal } from "../context/AuthModalProvider";
+import { useUser } from "../context/UserProvider";
 import { useAddToCollection } from "../hooks/api/useAddToCollection";
 import { useGetCollection } from "../hooks/api/useGetCollection";
 import { useRemoveFromCollection } from "../hooks/api/useRemoveFromCollection";
@@ -14,6 +16,9 @@ export const Like = ({ data }: Props) => {
   const { data: collectionData, isLoading } = useGetCollection();
   const addToCollection = useAddToCollection();
   const removeFromCollection = useRemoveFromCollection();
+  const { getUser } = useUser();
+  const user = getUser();
+  const { setAuthModalOpen } = useAuthModal();
 
   const collectItem = useMemo(
     () =>
@@ -32,18 +37,22 @@ export const Like = ({ data }: Props) => {
       as={motion.div}
       whileTap={{ scale: 0.8 }}
       onClick={() => {
-        collectItem !== undefined
-          ? removeFromCollection.mutate({ id: data?._id ?? collectItem?._id })
-          : addToCollection.mutate({
-              mediaId: data?.id,
-              media_type: data?.media_type ?? "person",
-              original_title:
-                data?.original_title ?? data?.original_name ?? data?.name,
-              poster_path: data?.media_type ? data?.poster_path : undefined,
-              profile_path: !data?.media_type ? data?.profile_path : undefined,
-              vote_average: data?.vote_average,
-              vote_count: data?.vote_count,
-            });
+        user
+          ? collectItem !== undefined
+            ? removeFromCollection.mutate({ id: data?._id ?? collectItem?._id })
+            : addToCollection.mutate({
+                mediaId: data?.id,
+                media_type: data?.media_type ?? "person",
+                original_title:
+                  data?.original_title ?? data?.original_name ?? data?.name,
+                poster_path: data?.media_type ? data?.poster_path : undefined,
+                profile_path: !data?.media_type
+                  ? data?.profile_path
+                  : undefined,
+                vote_average: data?.vote_average,
+                vote_count: data?.vote_count,
+              })
+          : setAuthModalOpen(true);
       }}
     >
       {isLoading ||

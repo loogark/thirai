@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import { Account } from "./pages/Account";
-import { Auth } from "./pages/Auth";
 import { Home } from "./pages/Home";
 import { Movie } from "./pages/Movie";
 import { Movies } from "./pages/Movies";
@@ -16,14 +15,6 @@ export namespace Router {
       path: "/",
       element: <App />,
       children: [
-        {
-          path: "signup",
-          element: <Auth type='signup' />,
-        },
-        {
-          path: "signin",
-          element: <Auth type='signin' />,
-        },
         {
           path: "home",
           element: <Home />,

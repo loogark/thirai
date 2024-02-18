@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Link as ChakraLink,
   Flex,
   FormControl,
   FormLabel,
@@ -11,17 +10,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Link as ReactRouterLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserProvider";
 import useLogin from "../hooks/api/useLogin";
 import useRegister from "../hooks/api/useRegister";
 
-interface Props {
-  type: "signup" | "signin";
-}
-
-export const Auth = ({ type }: Props) => {
-  const isSignUp = type === "signup";
+export const Auth = () => {
+  const [isSignUp, setIsSignUp] = useState(false);
   const [value, setValue] = useState({ name: "", email: "", password: "" });
   const register = useRegister();
   const login = useLogin();
@@ -51,16 +46,9 @@ export const Auth = ({ type }: Props) => {
   }, []);
 
   return (
-    <Flex
-      width='100%'
-      py={{ base: "12", md: "24" }}
-      px={{ base: "0", sm: "8" }}
-      justify='center'
-      align='center'
-    >
+    <Flex width='100%' pb='24px' justify='center' align='center'>
       <Stack spacing='8'>
         <Stack spacing='6'>
-          <Heading as={"h5"}>Thirai</Heading>
           {isSignUp ? (
             <Stack spacing={{ base: "2", md: "3" }} textAlign='center'>
               <Heading size={{ base: "xs", md: "sm" }}>
@@ -68,9 +56,9 @@ export const Auth = ({ type }: Props) => {
               </Heading>
               <Text color='fg.muted'>
                 Already have an account?{" "}
-                <ChakraLink as={ReactRouterLink} to='/signin'>
+                <Button variant='link' onClick={() => setIsSignUp(false)}>
                   Sign in
-                </ChakraLink>
+                </Button>
               </Text>
             </Stack>
           ) : (
@@ -80,9 +68,9 @@ export const Auth = ({ type }: Props) => {
               </Heading>
               <Text color='fg.muted'>
                 Don't have an account?{" "}
-                <ChakraLink as={ReactRouterLink} to='/signup'>
+                <Button variant='link' onClick={() => setIsSignUp(true)}>
                   Sign up
-                </ChakraLink>
+                </Button>
               </Text>
             </Stack>
           )}

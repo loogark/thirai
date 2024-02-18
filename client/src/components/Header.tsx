@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link as ReactRouterLink, useLocation } from "react-router-dom";
 import { useUser } from "../context/UserProvider";
 import { AccountMenu } from "./AccountMenu";
+import { AuthModal } from "./AuthModal";
 
 export const Header = () => {
   const [colorChange, setColorChange] = useState(false);
@@ -88,23 +89,7 @@ export const Header = () => {
           Search
         </Box>
       </Flex>
-      {user ? (
-        <AccountMenu />
-      ) : (
-        <Box
-          py='6px'
-          px='8px'
-          fontSize='18px'
-          fontWeight={700}
-          color='white'
-          as={ReactRouterLink}
-          to='/signin'
-          borderRadius='6px'
-          _hover={{ bg: "#525CEB", color: "white" }}
-        >
-          Sign in
-        </Box>
-      )}
+      {user ? <AccountMenu /> : <AuthModal />}
     </Flex>
   );
 };
