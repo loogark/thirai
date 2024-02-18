@@ -17,11 +17,16 @@ import { CastRow } from "../components/CastRow";
 import { Hero } from "../components/Hero";
 import { MovieCard } from "../components/MovieCard";
 import { PosterRow } from "../components/PosterRow";
+import { Review } from "../components/Review";
 import { useGetSeries } from "../hooks/api/useGetSeries";
+import { useGetSeriesReviews } from "../hooks/api/useGetSeriesReviews";
 
 export const Show = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetSeries(id!);
+  const { data: reviewData, isLoading: reviewLoading } = useGetSeriesReviews(
+    id!
+  );
   const [tabIndex, setTabIndex] = useState(0);
 
   const noSimilarShows = data?.similar?.results.length === 0;
@@ -166,12 +171,7 @@ export const Show = () => {
             </Flex>
           </TabPanel>
           <TabPanel>
-            <Flex direction='column' gap='8px'>
-              <Heading lineHeight='tall' size='xs' color='white'>
-                {" "}
-                Backdrops
-              </Heading>
-            </Flex>
+            <Review data={reviewData} loading={reviewLoading} />
           </TabPanel>
           <TabPanel>
             <Flex

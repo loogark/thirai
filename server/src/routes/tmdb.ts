@@ -5,6 +5,7 @@ import {
   getMovieList,
   getMovieNowPlayingPage,
   getMoviePopularPage,
+  getMovieReviews,
   getMovieTopRatedPage,
   getMovieTrendingPage,
   getMovieUpcomingPage,
@@ -17,6 +18,7 @@ import {
   getShowList,
   getShowOnTheAirPage,
   getShowPopularPage,
+  getShowReviews,
   getShowTopRatedPage,
   getShowTrendingPage,
   getTrending,
@@ -64,6 +66,9 @@ router.get("/details/movie/:id", getMovieDetailsPage);
 // get Movie Genre Page
 router.get("/movie/genre/:genre/:page", getMovieGenrePage);
 
+// get movie reviews
+router.get("/movie/:id/reviews/:page", getMovieReviews);
+
 // get Trending Show Page
 router.get("/trending/show/page/:page", getShowTrendingPage);
 
@@ -84,6 +89,9 @@ router.get("/details/show/:id", getShowDetailsPage);
 
 // get Show Episodes Details Page
 router.get("/episodes/show/:id/:seasonnumber", getShowEpisodesPage);
+
+// get movie reviews
+router.get("/show/:id/reviews/:page", getShowReviews);
 
 // get Show Genre Page
 router.get("/show/genre/:genre/:page", getShowGenrePage);

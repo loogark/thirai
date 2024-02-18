@@ -9,24 +9,22 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CastRow } from "../components/CastRow";
 import { Hero } from "../components/Hero";
 import { MovieCard } from "../components/MovieCard";
 import { PosterRow } from "../components/PosterRow";
+import { Review } from "../components/Review";
 import { useGetMovie } from "../hooks/api/useGetMovie";
+import { useGetMovieReviews } from "../hooks/api/useGetMovieReviews";
 
 export const Movie = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetMovie(id!);
-  const [tabIndex, setTabIndex] = useState(0);
 
-  useEffect(() => {
-    return () => {
-      setTabIndex(0);
-    };
-  }, [id]);
+  const { data: reviewData, isLoading: reviewLoading } = useGetMovieReviews(
+    id!
+  );
 
   return (
     <Flex
@@ -38,13 +36,7 @@ export const Movie = () => {
       gap={8}
     >
       <Hero data={data} loading={isLoading} />
-      <Tabs
-        w='100%'
-        variant='soft-rounded'
-        isLazy
-        index={tabIndex}
-        onChange={(i) => setTabIndex(i)}
-      >
+      <Tabs w='100%' variant='soft-rounded'>
         <TabList>
           <Flex
             w='100%'
@@ -135,12 +127,7 @@ export const Movie = () => {
             </Flex>
           </TabPanel>
           <TabPanel>
-            <Flex direction='column' gap='8px'>
-              <Heading lineHeight='tall' size='xs' color='white'>
-                {" "}
-                Backdrops
-              </Heading>
-            </Flex>
+            <Review data={reviewData} loading={reviewLoading} />
           </TabPanel>
           <TabPanel>
             <Flex

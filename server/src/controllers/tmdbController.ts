@@ -268,3 +268,25 @@ export const getSearchResults = async (req: Request, res: Response) => {
     res.status(500).json(error);
   }
 };
+
+export const getMovieReviews = async (req: Request, res: Response) => {
+  try {
+    const request = await axios.get(
+      `${BASE_URL}movie/${req.params.id}/reviews?api_key=${API_KEY}&?language=en-US&page=${req.params.page}`
+    );
+    res.status(200).json(request.data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+export const getShowReviews = async (req: Request, res: Response) => {
+  try {
+    const request = await axios.get(
+      `${BASE_URL}tv/${req.params.id}/reviews?api_key=${API_KEY}&?language=en-US&page=${req.params.page}`
+    );
+    res.status(200).json(request.data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};

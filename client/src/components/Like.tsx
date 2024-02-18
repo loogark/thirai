@@ -14,7 +14,6 @@ export const Like = ({ data }: Props) => {
   const { data: collectionData, isLoading } = useGetCollection();
   const addToCollection = useAddToCollection();
   const removeFromCollection = useRemoveFromCollection();
-  console.log(data, "data");
 
   const collectItem = useMemo(
     () =>
