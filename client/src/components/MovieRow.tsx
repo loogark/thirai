@@ -1,8 +1,10 @@
-import { Flex, Heading, Tag } from "@chakra-ui/react";
+import { Box, Flex, Heading, Tag } from "@chakra-ui/react";
+import { css } from "@emotion/react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
 import { MovieCard } from "./MovieCard";
+import { ScrollHandlers } from "./ScrollHandlers";
 
 interface Props {
   data: Record<string, any>;
@@ -49,23 +51,37 @@ export const MovieRow = ({ data, loading, title, path, isShow }: Props) => {
           Explore All
         </Tag>
       </Flex>
-      <Flex
-        ref={ref}
-        as={motion.div}
-        variants={container}
-        initial={isInView ? "show" : "hidden"}
-        whileInView='show'
-        viewport={{ once: true }}
-        direction='row'
-        gap={2}
-        w='100%'
-        h='fit-content'
-        overflowX='scroll'
-      >
-        {data?.results?.map((movie: any) => (
-          <MovieCard key={data.id} data={movie} isShow={isShow} />
-        ))}
-      </Flex>
+      <Box w='100%' h='100%' position='relative' boxSizing='border-box'>
+        <Flex
+          ref={ref}
+          as={motion.div}
+          variants={container}
+          initial={isInView ? "show" : "hidden"}
+          whileInView='show'
+          viewport={{ once: true }}
+          direction='row'
+          gap={2}
+          w='100%'
+          h='fit-content'
+          overflowX='scroll'
+          css={css`
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          `}
+        >
+          {data?.results?.map((movie: any) => (
+            <MovieCard key={data.id} data={movie} isShow={isShow} />
+          ))}
+          <ScrollHandlers
+            data={data?.results}
+            ref={ref as RefObject<typeof ref>}
+          />
+        </Flex>
+      </Box>
     </Flex>
   );
 };

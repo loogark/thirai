@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { AuthModalProvider } from "./context/AuthModalProvider";
 import { UsersProvider } from "./context/UserProvider";
@@ -16,6 +17,7 @@ function App() {
           <UsersProvider>
             <Header />
             <Outlet />
+            <Footer />
             <ScrollRestoration />
           </UsersProvider>
         </AuthModalProvider>

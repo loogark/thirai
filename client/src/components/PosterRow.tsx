@@ -1,6 +1,8 @@
-import { AspectRatio, Flex, Heading, Image } from "@chakra-ui/react";
+import { AspectRatio, Box, Flex, Heading, Image } from "@chakra-ui/react";
+import { css } from "@emotion/react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
+import { ScrollHandlers } from "./ScrollHandlers";
 
 interface Props {
   data: Record<string, any>[];
@@ -49,30 +51,40 @@ export const PosterRow = ({ data }: Props) => {
         w='100%'
         h='100%'
         overflowX='scroll'
+        css={css`
+          scroll-behavior: smooth;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        `}
       >
-        {data?.map((poster: any) => (
-          <Flex w='250px' h='100%' bg='rgb(19, 19, 19)'>
-            <AspectRatio
-              position='relative'
-              w='250px'
-              cursor='pointer'
-              h='fit-content'
-              maxW='400px'
-              ratio={0.67 / 1}
-            >
-              <>
-                <Image
-                  width='100%'
-                  loading='lazy'
-                  fallbackSrc='https://mymovies-client.onrender.com/static/media/EmptyCard.82427e86b72979c60e4e5bce792b9c52.svg'
-                  h='100%'
-                  objectFit='contain'
-                  src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${poster?.file_path}`}
-                />
-              </>
-            </AspectRatio>
-          </Flex>
-        ))}
+        <Box position='relative' w='100%' h='100%' boxSizing='border-box'>
+          {data?.map((poster: any) => (
+            <Flex w='250px' h='100%' bg='rgb(19, 19, 19)'>
+              <AspectRatio
+                w='250px'
+                cursor='pointer'
+                h='fit-content'
+                maxW='400px'
+                ratio={0.67 / 1}
+              >
+                <>
+                  <Image
+                    width='100%'
+                    loading='lazy'
+                    fallbackSrc='https://mymovies-client.onrender.com/static/media/EmptyCard.82427e86b72979c60e4e5bce792b9c52.svg'
+                    h='100%'
+                    objectFit='contain'
+                    src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${poster?.file_path}`}
+                  />
+                </>
+              </AspectRatio>
+              <ScrollHandlers data={data} ref={ref as RefObject<typeof ref>} />
+            </Flex>
+          ))}
+        </Box>
       </Flex>
     </Flex>
   );
