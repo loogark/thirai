@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useAuthModal } from "../context/AuthModalProvider";
-import { Auth } from "../pages/Auth";
+import { Auth } from "./Auth";
 
 export const AuthModal = () => {
   const { authModalOpen, setAuthModalOpen } = useAuthModal();

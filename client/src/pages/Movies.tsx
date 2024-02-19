@@ -8,6 +8,7 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
+import { Helmet } from "react-helmet";
 import InfiniteScroll from "react-infinite-scroller";
 import { Hero } from "../components/Hero";
 import { MovieCard } from "../components/MovieCard";
@@ -47,117 +48,126 @@ export const Movies = () => {
   } = useGetUpcomingMovies();
 
   return (
-    <Flex
-      direction='column'
-      align='flex-start'
-      justify='flex-start'
-      w='100%'
-      h='100%'
-      gap={8}
-    >
-      <Hero data={data} loading={isLoading} isClickable />
+    <>
+      <Helmet>
+        <title>{`Trending, Popular, Top-rated movies in Thirai`} </title>
+        <meta
+          name='description'
+          content={`All the Trending, Popular, Top-rated movies in Thirai`}
+        />
+      </Helmet>
+      <Flex
+        direction='column'
+        align='flex-start'
+        justify='flex-start'
+        w='100%'
+        h='100%'
+        gap={8}
+      >
+        <Hero data={data} loading={isLoading} isClickable />
 
-      <Tabs variant='soft-rounded' isLazy>
-        <TabList>
-          <Flex
-            w='100%'
-            p='24px'
-            gap={4}
-            direction='row'
-            justifyContent='space-between'
-            align='center'
-            wrap='wrap'
-          >
-            <Heading lineHeight='tall' size='xs' color='white'>
-              Movies
-            </Heading>
+        <Tabs variant='soft-rounded' isLazy>
+          <TabList>
             <Flex
-              wrap='wrap'
+              w='100%'
+              p='24px'
+              gap={4}
               direction='row'
-              justify='center'
+              justifyContent='space-between'
               align='center'
-              gap='4px'
+              wrap='wrap'
             >
-              {LocalTabList.map((tab) => (
-                <Tab
-                  _selected={{ color: "white", bg: "#525CEB" }}
-                  key={tab.name}
-                >
-                  {tab.name}
-                </Tab>
-              ))}
+              <Heading lineHeight='tall' size='xs' color='white'>
+                Movies
+              </Heading>
+              <Flex
+                wrap='wrap'
+                direction='row'
+                justify='center'
+                align='center'
+                gap='4px'
+              >
+                {LocalTabList.map((tab) => (
+                  <Tab
+                    _selected={{ color: "white", bg: "#525CEB" }}
+                    key={tab.name}
+                  >
+                    {tab.name}
+                  </Tab>
+                ))}
+              </Flex>
             </Flex>
-          </Flex>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <InfiniteScroll
-              pageStart={1}
-              loadMore={() => nextPopularMovies()}
-              hasMore={hasMorePopular}
-              loader={<Spinner my='24px' color='#525CEB' size='xl' />}
-            >
-              <Flex
-                direction='row'
-                justify='center'
-                align='center'
-                wrap='wrap'
-                gap='24px'
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <InfiniteScroll
+                pageStart={1}
+                loadMore={() => nextPopularMovies()}
+                hasMore={hasMorePopular}
+                loader={<Spinner my='24px' color='#525CEB' size='xl' />}
               >
-                {popularMovies?.pages.map((res) => {
-                  return res.results.map((movie: any) => (
-                    <MovieCard key={movie.id} data={movie} />
-                  ));
-                })}
-              </Flex>
-            </InfiniteScroll>
-          </TabPanel>
-          <TabPanel>
-            <InfiniteScroll
-              pageStart={1}
-              loadMore={() => fetchNextPage()}
-              hasMore={hasNextPage}
-              loader={<Spinner my='24px' color='#525CEB' size='xl' />}
-            >
-              <Flex
-                direction='row'
-                justify='center'
-                align='center'
-                wrap='wrap'
-                gap='24px'
+                <Flex
+                  direction='row'
+                  justify='center'
+                  align='center'
+                  wrap='wrap'
+                  gap='24px'
+                >
+                  {popularMovies?.pages.map((res) => {
+                    return res.results.map((movie: any) => (
+                      <MovieCard key={movie.id} data={movie} />
+                    ));
+                  })}
+                </Flex>
+              </InfiniteScroll>
+            </TabPanel>
+            <TabPanel>
+              <InfiniteScroll
+                pageStart={1}
+                loadMore={() => fetchNextPage()}
+                hasMore={hasNextPage}
+                loader={<Spinner my='24px' color='#525CEB' size='xl' />}
               >
-                {topRated?.pages.map((res) => {
-                  return res.results.map((movie: any) => (
-                    <MovieCard key={movie.id} data={movie} />
-                  ));
-                })}
-              </Flex>
-            </InfiniteScroll>
-          </TabPanel>
-          <TabPanel>
-            <InfiniteScroll
-              pageStart={1}
-              loadMore={() => nextUpcomingPage()}
-              hasMore={hasUpcomingNext}
-              loader={<Spinner my='24px' color='#525CEB' size='xl' />}
-            >
-              <Flex
-                direction='row'
-                justify='center'
-                align='center'
-                wrap='wrap'
-                gap='24px'
+                <Flex
+                  direction='row'
+                  justify='center'
+                  align='center'
+                  wrap='wrap'
+                  gap='24px'
+                >
+                  {topRated?.pages.map((res) => {
+                    return res.results.map((movie: any) => (
+                      <MovieCard key={movie.id} data={movie} />
+                    ));
+                  })}
+                </Flex>
+              </InfiniteScroll>
+            </TabPanel>
+            <TabPanel>
+              <InfiniteScroll
+                pageStart={1}
+                loadMore={() => nextUpcomingPage()}
+                hasMore={hasUpcomingNext}
+                loader={<Spinner my='24px' color='#525CEB' size='xl' />}
               >
-                {upcoming?.pages.map((res) => {
-                  return res.results.map((movie: any) => (
-                    <MovieCard key={movie.id} data={movie} />
-                  ));
-                })}
-              </Flex>
-            </InfiniteScroll>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Flex>
+                <Flex
+                  direction='row'
+                  justify='center'
+                  align='center'
+                  wrap='wrap'
+                  gap='24px'
+                >
+                  {upcoming?.pages.map((res) => {
+                    return res.results.map((movie: any) => (
+                      <MovieCard key={movie.id} data={movie} />
+                    ));
+                  })}
+                </Flex>
+              </InfiniteScroll>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Flex>
+    </>
   );
 };

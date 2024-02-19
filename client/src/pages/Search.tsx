@@ -1,5 +1,6 @@
 import { Flex, Heading, Input, Spinner } from "@chakra-ui/react";
 import { ChangeEvent, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import InfiniteScroll from "react-infinite-scroller";
 import { useSearchParams } from "react-router-dom";
 import { NothingFound } from "../assets/NothingFound";
@@ -42,73 +43,82 @@ export const Search = () => {
   };
 
   return (
-    <Flex
-      direction='column'
-      align='center'
-      justify='start'
-      w='100%'
-      h='100vh'
-      gap={8}
-      mb='90px'
-      mt='120px'
-    >
-      <Input
-        flexShrink={0}
-        value={value}
-        onChange={handleChange}
-        color='white'
-        w={{ base: "90vw", md: "70vw", lg: "70vw" }}
-        variant='filled'
-        placeholder='Search for movies, shows, and people'
-        bgColor='gray.800'
-        _hover={{ bgColor: "gray.700" }}
-      />
-      {isLoading ? (
-        <Spinner size='xl' color='#525CEB' />
-      ) : (
-        <InfiniteScroll
-          loadMore={() => fetchNextPage()}
-          hasMore={hasNextPage ?? false}
-          loader={<Spinner my='24px' color='#525CEB' size='xl' />}
-        >
+    <>
+      <Helmet>
+        <title>{searchQuery ? `${searchQuery} - ` : "Search - "} thirai</title>
+        <meta
+          name='description'
+          content={`Search results for ${searchQuery ?? "search"} in thirai`}
+        />
+      </Helmet>
+      <Flex
+        direction='column'
+        align='center'
+        justify='start'
+        w='100%'
+        h='100vh'
+        gap={8}
+        mb='90px'
+        mt='120px'
+      >
+        <Input
+          flexShrink={0}
+          value={value}
+          onChange={handleChange}
+          color='white'
+          w={{ base: "90vw", md: "70vw", lg: "70vw" }}
+          variant='filled'
+          placeholder='Search for movies, shows, and people'
+          bgColor='gray.800'
+          _hover={{ bgColor: "gray.700" }}
+        />
+        {isLoading ? (
+          <Spinner size='xl' color='#525CEB' />
+        ) : (
+          <InfiniteScroll
+            loadMore={() => fetchNextPage()}
+            hasMore={hasNextPage ?? false}
+            loader={<Spinner my='24px' color='#525CEB' size='xl' />}
+          >
+            <Flex
+              direction='row'
+              justify='center'
+              align='center'
+              wrap='wrap'
+              gap='24px'
+            >
+              {data?.pages.map((res) => {
+                return res.results.map((res: any) => <> {getMediaType(res)}</>);
+              })}
+            </Flex>
+          </InfiniteScroll>
+        )}
+        {data?.pages[0].results.length === 0 && (
           <Flex
-            direction='row'
+            maxW={{ base: "250px", md: "380px" }}
+            h='300px'
+            direction='column'
             justify='center'
             align='center'
-            wrap='wrap'
-            gap='24px'
+            gap={"8px"}
           >
-            {data?.pages.map((res) => {
-              return res.results.map((res: any) => <> {getMediaType(res)}</>);
-            })}
+            <NothingFound />
+            <Heading my='16px' color='gray.500' size={{ base: "xs", md: "sm" }}>
+              No results found
+            </Heading>
           </Flex>
-        </InfiniteScroll>
-      )}
-      {data?.pages[0].results.length === 0 && (
-        <Flex
-          maxW={{ base: "250px", md: "380px" }}
-          h='300px'
-          direction='column'
-          justify='center'
-          align='center'
-          gap={"8px"}
-        >
-          <NothingFound />
-          <Heading my='16px' color='gray.500' size={{ base: "xs", md: "sm" }}>
-            No results found
-          </Heading>
-        </Flex>
-      )}
-      {!isLoading && !searchQuery && (
-        <Flex
-          maxW={{ base: "250px", md: "380px" }}
-          h='300px'
-          justify='start'
-          align='center'
-        >
-          <SearchAssets />{" "}
-        </Flex>
-      )}
-    </Flex>
+        )}
+        {!isLoading && !searchQuery && (
+          <Flex
+            maxW={{ base: "250px", md: "380px" }}
+            h='300px'
+            justify='start'
+            align='center'
+          >
+            <SearchAssets />{" "}
+          </Flex>
+        )}
+      </Flex>
+    </>
   );
 };

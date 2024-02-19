@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@types/react-helmet": "^6.1.11",
     "axios": "^1.6.7"
   }
 }

@@ -15,6 +15,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { LiaImdb } from "react-icons/lia";
 import { RiFacebookFill, RiInstagramFill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
@@ -46,19 +47,35 @@ export const Person = () => {
 
   if (isLoading)
     return (
-      <Flex
-        direction='column'
-        align='center'
-        justify='center'
-        w='100%'
-        h='100vh'
-        gap={8}
-        mt='76px'
-        px='54px'
-        py='36px'
-      >
-        <Spinner size='xl' color='#525CEB' />
-      </Flex>
+      <>
+        <Helmet>
+          <title>
+            {`${
+              (data as any).name ?? (data as any).original_name ?? "Person"
+            } - `}{" "}
+            Thirai
+          </title>
+          <meta
+            name='description'
+            content={`${
+              (data as any).name ?? (data as any).original_name ?? "Person"
+            } - in thirai`}
+          />
+        </Helmet>
+        <Flex
+          direction='column'
+          align='center'
+          justify='center'
+          w='100%'
+          h='100vh'
+          gap={8}
+          mt='76px'
+          px='54px'
+          py='36px'
+        >
+          <Spinner size='xl' color='#525CEB' />
+        </Flex>
+      </>
     );
 
   return (
