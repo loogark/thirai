@@ -34,7 +34,7 @@ export const PosterRow = ({ data }: Props) => {
       w='100%'
       h='fit-content'
     >
-      <Flex direction='row' gap={2} justify='center' align='center'>
+      <Flex wrap='wrap' direction='row' gap={2} justify='center' align='center'>
         <Heading lineHeight='tall' size='xs' color='white'>
           Posters
         </Heading>
@@ -67,7 +67,6 @@ export const PosterRow = ({ data }: Props) => {
                 w='250px'
                 cursor='pointer'
                 h='fit-content'
-                maxW='400px'
                 ratio={0.67 / 1}
               >
                 <>

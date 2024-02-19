@@ -37,7 +37,14 @@ export const MovieRow = ({ data, loading, title, path, isShow }: Props) => {
       w='100%'
       h='fit-content'
     >
-      <Flex direction='row' gap={2} justify='center' align='center'>
+      <Flex
+        w={"100%"}
+        direction='row'
+        gap={2}
+        justify='start'
+        wrap='wrap'
+        align='center'
+      >
         <Heading lineHeight='tall' size='xs' color='white'>
           {title}
         </Heading>

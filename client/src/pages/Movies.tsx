@@ -62,14 +62,22 @@ export const Movies = () => {
           <Flex
             w='100%'
             p='24px'
+            gap={4}
             direction='row'
             justifyContent='space-between'
             align='center'
+            wrap='wrap'
           >
             <Heading lineHeight='tall' size='xs' color='white'>
               Movies
             </Heading>
-            <Flex direction='row' justify='center' align='center' gap='4px'>
+            <Flex
+              wrap='wrap'
+              direction='row'
+              justify='center'
+              align='center'
+              gap='4px'
+            >
               {LocalTabList.map((tab) => (
                 <Tab
                   _selected={{ color: "white", bg: "#525CEB" }}

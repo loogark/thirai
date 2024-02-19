@@ -49,11 +49,19 @@ export const Movie = () => {
             direction='row'
             justifyContent='space-between'
             align='center'
+            wrap='wrap'
+            gap={4}
           >
             <Heading lineHeight='tall' size='xs' color='white'>
               Movie Details
             </Heading>
-            <Flex direction='row' justify='center' align='center' gap='4px'>
+            <Flex
+              direction='row'
+              justify='center'
+              align='center'
+              gap='4px'
+              wrap='wrap'
+            >
               <Tab _selected={{ color: "white", bg: "#525CEB" }}>
                 Cast & Crew
               </Tab>

@@ -28,17 +28,17 @@ export const MovieCard = ({ data, isShow, department }: Props) => {
       variants={item}
       ref={setParentRef}
       gap={2}
-      w='250px'
+      w={{ base: "150px", md: "250px" }}
       h='100%'
       direction='column'
       bg='rgb(19, 19, 19)'
     >
       <AspectRatio
         position='relative'
-        w='250px'
+        w={{ base: "150px", md: "250px" }}
+        maxW={{ base: "150px", md: "400px" }}
         cursor='pointer'
         h='fit-content'
-        maxW='400px'
         ratio={0.67 / 1}
         as={ReactRouterLink}
         to={isShow ? `/show/${data?.id}` : `/movie/${data?.id}`}

@@ -68,6 +68,8 @@ export const Shows = () => {
             direction='row'
             justifyContent='space-between'
             align='center'
+            wrap='wrap'
+            gap={4}
           >
             <Heading lineHeight='tall' size='xs' color='white'>
               Tv Shows

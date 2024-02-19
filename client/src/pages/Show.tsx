@@ -61,11 +61,19 @@ export const Show = () => {
             direction='row'
             justifyContent='space-between'
             align='center'
+            wrap='wrap'
+            gap={4}
           >
             <Heading lineHeight='tall' size='xs' color='white'>
               Show Details
             </Heading>
-            <Flex direction='row' justify='center' align='center' gap='4px'>
+            <Flex
+              wrap='wrap'
+              direction='row'
+              justify='center'
+              align='center'
+              gap='4px'
+            >
               <Tab _selected={{ color: "white", bg: "#525CEB" }}>
                 Cast & Crew
               </Tab>

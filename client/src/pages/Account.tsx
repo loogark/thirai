@@ -95,12 +95,22 @@ export const Account = () => {
           gap={2}
         >
           <HStack gap='2' align='center' justify='center'>
-            <Heading textAlign='start' as='h1' size='xl' color='white'>
+            <Heading
+              textAlign='start'
+              as='h1'
+              size={{ base: "sm", md: "lg", lg: "xl" }}
+              color='white'
+            >
               {user?.firstName}{" "}
             </Heading>
           </HStack>
 
-          <Text textAlign='start' noOfLines={3} fontSize='xl' color='white'>
+          <Text
+            textAlign='start'
+            noOfLines={3}
+            fontSize={{ base: "sm", md: "lg", lg: "xl" }}
+            color='white'
+          >
             Welcome to Thirai !!! Know your movies and tv series.
           </Text>
         </Flex>
@@ -121,8 +131,16 @@ export const Account = () => {
             direction='row'
             justifyContent='space-between'
             align='center'
+            wrap='wrap'
+            gap={4}
           >
-            <Flex direction='row' justify='center' align='center' gap='4px'>
+            <Flex
+              gap='4px'
+              wrap='wrap'
+              direction='row'
+              justify='center'
+              align='center'
+            >
               {LocalTabList?.map((tab) => (
                 <Tab
                   _selected={{ color: "white", bg: "#525CEB" }}

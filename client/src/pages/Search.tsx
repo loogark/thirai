@@ -56,7 +56,7 @@ export const Search = () => {
         value={value}
         onChange={handleChange}
         color='white'
-        w='70vw'
+        w={{ base: "90vw", md: "70vw", lg: "70vw" }}
         variant='filled'
         placeholder='Search for movies, shows, and people'
         bgColor='gray.800'
@@ -85,7 +85,7 @@ export const Search = () => {
       )}
       {data?.pages[0].results.length === 0 && (
         <Flex
-          maxW='380px'
+          maxW={{ base: "250px", md: "380px" }}
           h='300px'
           direction='column'
           justify='center'
@@ -99,7 +99,12 @@ export const Search = () => {
         </Flex>
       )}
       {!isLoading && !searchQuery && (
-        <Flex maxW='380px' h='300px' justify='start' align='center'>
+        <Flex
+          maxW={{ base: "250px", md: "380px" }}
+          h='300px'
+          justify='start'
+          align='center'
+        >
           <SearchAssets />{" "}
         </Flex>
       )}

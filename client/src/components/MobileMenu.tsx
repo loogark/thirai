@@ -42,8 +42,8 @@ export const MobileMenu = () => {
           <MenuItem fontSize='16px' as={Link} to='/movies'>
             Movies
           </MenuItem>
-          <MenuItem fontSize='16px' as={Link} to={"/series"}>
-            Series
+          <MenuItem fontSize='16px' as={Link} to={"/shows"}>
+            Tv Series
           </MenuItem>
           <MenuItem fontSize='16px' as={Link} to='/search'>
             Search
