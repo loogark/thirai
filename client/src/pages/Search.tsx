@@ -49,6 +49,7 @@ export const Search = () => {
       w='100%'
       h='100%'
       gap={8}
+      mb='90px'
       mt='120px'
     >
       <Input
