@@ -1,4 +1,4 @@
-import { Flex, HStack, Link, Text, VStack } from "@chakra-ui/react";
+import { Flex, HStack, Link, Stack, Text } from "@chakra-ui/react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 
@@ -7,16 +7,19 @@ export const Footer = () => {
     <Flex
       p='24px'
       mt='52px'
-      direction='row'
-      flexWrap={"wrap"}
+      direction={{ base: "column", md: "row" }}
       align='center'
-      justify='space-between'
+      justify={{ base: "center", md: "space-between" }}
       width='100%'
       h='fit-content'
       bgColor={"rgb(19, 19, 19) "}
     >
-      <VStack justifyContent='flex-start' align='flex-start'>
-        <Flex direction='row' gap='8px'>
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        justifyContent={{ base: "center", md: "flex-start" }}
+        align={{ base: "center", md: "flex-start" }}
+      >
+        <Flex direction={{ base: "column", md: "row" }} gap='8px'>
           <Text color='white' fontSize='sm'>
             Copyright © 2024 - All rights reserved.
           </Text>
@@ -37,7 +40,7 @@ export const Footer = () => {
             @loogark
           </Link>
         </Text>
-      </VStack>
+      </Stack>
       <HStack gap='12px' align='center' justify='center'>
         <Link href='https://github.com/loogark' isExternal>
           <FaGithub color='white' size={24} />

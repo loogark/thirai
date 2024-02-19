@@ -183,7 +183,11 @@ export const Person = () => {
                   );
                 })
               ) : (
-                <Heading my='16px' color='gray.500' size='sm'>
+                <Heading
+                  my='16px'
+                  color='gray.500'
+                  size={{ base: "xs", md: "sm" }}
+                >
                   Sorry, no acting roles found
                 </Heading>
               )}
@@ -209,7 +213,11 @@ export const Person = () => {
                   );
                 })
               ) : (
-                <Heading my='16px' color='gray.500' size='sm'>
+                <Heading
+                  my='16px'
+                  color='gray.500'
+                  size={{ base: "xs", md: "sm" }}
+                >
                   Sorry, no crew roles found
                 </Heading>
               )}
@@ -250,7 +258,11 @@ export const Person = () => {
                   </Flex>
                 ))
               ) : (
-                <Heading my='16px' color='gray.500' size='sm'>
+                <Heading
+                  my='16px'
+                  color='gray.500'
+                  size={{ base: "xs", md: "sm" }}
+                >
                   Sorry, no Photos found
                 </Heading>
               )}

@@ -45,14 +45,15 @@ export const Search = () => {
     <Flex
       direction='column'
       align='center'
-      justify='center'
+      justify='start'
       w='100%'
-      h='100%'
+      h='100vh'
       gap={8}
       mb='90px'
       mt='120px'
     >
       <Input
+        flexShrink={0}
         value={value}
         onChange={handleChange}
         color='white'
@@ -93,7 +94,7 @@ export const Search = () => {
           gap={"8px"}
         >
           <NothingFound />
-          <Heading my='16px' color='gray.500' size='sm'>
+          <Heading my='16px' color='gray.500' size={{ base: "xs", md: "sm" }}>
             No results found
           </Heading>
         </Flex>

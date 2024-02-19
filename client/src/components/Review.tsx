@@ -25,7 +25,7 @@ export const Review = ({ data, loading }: Props) => {
         gap='36px'
         p='24px'
       >
-        <Heading my='16px' color='gray.500' size='sm'>
+        <Heading my='16px' color='gray.500' size={{ base: "xs", md: "sm" }}>
           Sorry, no reviews yet
         </Heading>
       </Flex>

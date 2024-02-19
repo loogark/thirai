@@ -87,15 +87,19 @@ export const Show = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Flex p='24px' direction='column' gap='24px'>
-              {data?.credits?.cast && data?.credits?.cast.length && (
+            <Flex
+              p={{ base: "18px", md: "20px", lg: "24px" }}
+              direction='column'
+              gap='24px'
+            >
+              {data?.credits?.cast && data?.credits?.cast.length !== 0 && (
                 <CastRow
                   title='Cast'
                   data={data?.credits?.cast}
                   loading={isLoading}
                 />
               )}
-              {data?.credits?.crew && data?.credits?.crew.length && (
+              {data?.credits?.crew && data?.credits?.crew.length !== 0 && (
                 <CastRow
                   title='crew'
                   data={data?.credits?.crew}
@@ -103,13 +107,15 @@ export const Show = () => {
                   isCrew
                 />
               )}
-              {!data?.credits?.cast &&
-                !data?.credits?.cast.length &&
-                !data?.credits?.crew &&
-                !data?.credits?.crew.length && (
+              {(!data?.credits?.cast || data?.credits?.cast.length === 0) &&
+                (!data?.credits?.crew || data?.credits?.crew.length === 0) && (
                   <Box width='100%'>
-                    <Heading color='white' mx='auto' size='md' as={"h5"}>
-                      Sorry, No casts and crew found
+                    <Heading
+                      my='16px'
+                      color='gray.500'
+                      size={{ base: "xs", md: "sm" }}
+                    >
+                      Sorry, no cast and crew details available
                     </Heading>
                   </Box>
                 )}
@@ -117,61 +123,66 @@ export const Show = () => {
           </TabPanel>
           <TabPanel>
             <Flex direction='column' gap='8px' p='24px'>
-              {data?.images?.posters && data?.images?.posters.length && (
+              {data?.images?.posters && data?.images?.posters.length !== 0 && (
                 <PosterRow data={data?.images?.posters} loading={isLoading} />
               )}
-              {data?.images?.backdrops && data?.images?.backdrops.length && (
-                <Flex
-                  my='24px'
-                  direction='column'
-                  justify='flex-start'
-                  alignItems='flex-start'
-                  gap='8px'
-                >
-                  <Heading lineHeight='tall' size='xs' color='white'>
-                    {" "}
-                    Backdrops
-                  </Heading>
+              {data?.images?.backdrops &&
+                data?.images?.backdrops.length !== 0 && (
                   <Flex
-                    direction='row'
+                    my='24px'
+                    direction='column'
                     justify='flex-start'
-                    align='center'
-                    wrap='wrap'
-                    gap={4}
+                    alignItems='flex-start'
+                    gap='8px'
                   >
-                    {data?.images?.backdrops?.map((backdrop: any) => (
-                      <Flex
-                        w='fit-content'
-                        h='100%'
-                        bg='rgb(19, 19, 19)'
-                        key={backdrop.file_path}
-                      >
-                        <AspectRatio
-                          position='relative'
-                          w={backdrop?.width}
-                          cursor='pointer'
-                          h='fit-content'
-                          maxW='400px'
-                          ratio={backdrop?.aspect_ratio}
+                    <Heading lineHeight='tall' size='xs' color='white'>
+                      {" "}
+                      Backdrops
+                    </Heading>
+                    <Flex
+                      direction='row'
+                      justify='flex-start'
+                      align='center'
+                      wrap='wrap'
+                      gap={4}
+                    >
+                      {data?.images?.backdrops?.map((backdrop: any) => (
+                        <Flex
+                          w='fit-content'
+                          h='100%'
+                          bg='rgb(19, 19, 19)'
+                          key={backdrop.file_path}
                         >
-                          <Image
-                            src={`https://image.tmdb.org/t/p/w500${backdrop.file_path}`}
-                            alt={backdrop.file_path}
-                            w='100%'
-                            h='100%'
-                            objectFit='cover'
-                          />
-                        </AspectRatio>
-                      </Flex>
-                    ))}
+                          <AspectRatio
+                            position='relative'
+                            w={backdrop?.width}
+                            cursor='pointer'
+                            h='fit-content'
+                            maxW='400px'
+                            ratio={backdrop?.aspect_ratio}
+                          >
+                            <Image
+                              src={`https://image.tmdb.org/t/p/w500${backdrop.file_path}`}
+                              alt={backdrop.file_path}
+                              w='100%'
+                              h='100%'
+                              objectFit='cover'
+                            />
+                          </AspectRatio>
+                        </Flex>
+                      ))}
+                    </Flex>
                   </Flex>
-                </Flex>
-              )}
+                )}
               {(!data?.images?.posters || !data?.images?.posters.length) &&
                 (!data?.images?.backdrops ||
                   !data?.images?.backdrops.length) && (
                   <Box width='100%'>
-                    <Heading my='16px' color='gray.500' size='sm'>
+                    <Heading
+                      my='16px'
+                      color='gray.500'
+                      size={{ base: "xs", md: "sm" }}
+                    >
                       Sorry, No media found
                     </Heading>
                   </Box>
@@ -197,7 +208,11 @@ export const Show = () => {
                   return <MovieCard isShow key={res.id} data={res} />;
                 })
               ) : (
-                <Heading my='16px' color='gray.500' size='sm'>
+                <Heading
+                  my='16px'
+                  color='gray.500'
+                  size={{ base: "xs", md: "sm" }}
+                >
                   Sorry, no similar shows found
                 </Heading>
               )}

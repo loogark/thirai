@@ -92,8 +92,12 @@ export const Movie = () => {
                 />
               )}
               {!data?.casts?.cast?.length && !data?.casts?.crew?.length && (
-                <Heading my='16px' color='gray.500' size='sm'>
-                  Sorry, no Cast or Crew details available
+                <Heading
+                  my='16px'
+                  color='gray.500'
+                  size={{ base: "xs", md: "sm" }}
+                >
+                  Sorry, no cast and crew details available
                 </Heading>
               )}
             </Flex>

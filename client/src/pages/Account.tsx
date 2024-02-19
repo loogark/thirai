@@ -168,7 +168,11 @@ export const Account = () => {
                 ;
               </Flex>
             ) : (
-              <Heading my='16px' color='gray.500' size='sm'>
+              <Heading
+                my='16px'
+                color='gray.500'
+                size={{ base: "xs", md: "sm" }}
+              >
                 No Movies added to the collection
               </Heading>
             )}
@@ -187,7 +191,11 @@ export const Account = () => {
                 ))}
               </Flex>
             ) : (
-              <Heading my='16px' color='gray.500' size='sm'>
+              <Heading
+                my='16px'
+                color='gray.500'
+                size={{ base: "xs", md: "sm" }}
+              >
                 No Tv Shows added to the collection
               </Heading>
             )}
@@ -206,7 +214,11 @@ export const Account = () => {
                 ))}
               </Flex>
             ) : (
-              <Heading my='16px' color='gray.500' size='sm'>
+              <Heading
+                my='16px'
+                color='gray.500'
+                size={{ base: "xs", md: "sm" }}
+              >
                 {" "}
                 No Persons added to the collection
               </Heading>
