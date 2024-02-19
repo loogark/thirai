@@ -68,7 +68,7 @@ const cleanSearchParams = (req: InternalAxiosRequestConfig<any>) => {
 };
 
 export const API = axios.create({
-  baseURL: "http://localhost:8002",
+  baseURL: "https://thirai-api.vercel.app/",
 });
 API.interceptors.request.use(cleanSearchParams);
 API.interceptors.response.use(onFulfilled, onRejected);
