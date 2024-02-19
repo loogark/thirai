@@ -1,8 +1,6 @@
 {
   "version": 2,
-  "build": "rimraf dist && tsc",
-  "devCommand": "nodemon src/server.ts",
-  "outputDirectory": "dist",
+
   "builds": [
     {
       "src": "dist/server.js",
