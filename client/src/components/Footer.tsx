@@ -15,7 +15,7 @@ export const Footer = () => {
       bgColor={"rgb(19, 19, 19) "}
     >
       <Stack
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column", lg: "column" }}
         justifyContent={{ base: "center", md: "flex-start" }}
         align={{ base: "center", md: "flex-start" }}
       >
