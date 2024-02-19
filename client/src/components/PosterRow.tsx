@@ -39,28 +39,28 @@ export const PosterRow = ({ data }: Props) => {
           Posters
         </Heading>
       </Flex>
-      <Flex
-        ref={ref}
-        as={motion.div}
-        variants={container}
-        initial={isInView ? "show" : "hidden"}
-        whileInView='show'
-        viewport={{ once: true }}
-        direction='row'
-        gap={4}
-        w='100%'
-        h='100%'
-        overflowX='scroll'
-        css={css`
-          scroll-behavior: smooth;
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-          &::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-      >
-        <Box position='relative' w='100%' h='100%' boxSizing='border-box'>
+      <Box position='relative' w='100%' h='100%' boxSizing='border-box'>
+        <Flex
+          ref={ref}
+          as={motion.div}
+          variants={container}
+          initial={isInView ? "show" : "hidden"}
+          whileInView='show'
+          viewport={{ once: true }}
+          direction='row'
+          gap={4}
+          w='100%'
+          h='100%'
+          overflowX='scroll'
+          css={css`
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          `}
+        >
           {data?.map((poster: any) => (
             <Flex w='250px' h='100%' bg='rgb(19, 19, 19)'>
               <AspectRatio
@@ -80,11 +80,11 @@ export const PosterRow = ({ data }: Props) => {
                   />
                 </>
               </AspectRatio>
-              <ScrollHandlers data={data} ref={ref as RefObject<typeof ref>} />
             </Flex>
           ))}
-        </Box>
-      </Flex>
+        </Flex>
+        <ScrollHandlers data={data} ref={ref as RefObject<typeof ref>} />
+      </Box>
     </Flex>
   );
 };

@@ -120,7 +120,7 @@ export const Movie = () => {
               </Flex>
             </TabPanel>
             <TabPanel>
-              <Flex direction='column' gap='8px' p='24px'>
+              <Flex width='100%' direction='column' gap='8px' p='24px'>
                 <PosterRow data={data?.images?.posters} loading={isLoading} />
                 {data?.images?.backdrops.length && (
                   <Flex
