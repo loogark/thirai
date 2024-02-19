@@ -81,7 +81,7 @@ export const Person = () => {
         {data?.name}{" "}
       </Heading>
       <Flex
-        direction={{ base: "column", md: "row", lg: "row" }}
+        direction={{ base: "column", md: "column", lg: "row" }}
         justify='start'
         align='start'
         gap='12px'
@@ -90,7 +90,7 @@ export const Person = () => {
         <AspectRatio
           flexShrink={0}
           ratio={0.67 / 1}
-          w={{ base: "80%", md: "250px", lg: "300px" }}
+          w={{ base: "80%", md: "450px", lg: "300px" }}
           h='fit-content'
           m={{ base: "auto", md: "none" }}
         >
