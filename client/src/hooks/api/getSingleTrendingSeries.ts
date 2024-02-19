@@ -9,16 +9,10 @@ export const useGetSingleTrendingSeries = () => {
     (single: Record<string, any>) => single.media_type !== "person"
   )[Math.floor(Math.random() * 10)];
 
-  const query = useQuery(
-    ["trending_series", singleData?.id],
-    async () => {
-      const response = await API.get(`api/tv/${singleData?.id}`);
-      return response.data;
-    },
-    {
-      onSuccess: (data) => {},
-    }
-  );
+  const query = useQuery(["trending_series", singleData?.id], async () => {
+    const response = await API.get(`api/tv/${singleData?.id}`);
+    return response.data;
+  });
 
   return query;
 };

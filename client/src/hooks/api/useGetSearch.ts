@@ -23,7 +23,6 @@ export const useGetSearch = () => {
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
-      onSuccess: (data) => {},
     }
   );
 

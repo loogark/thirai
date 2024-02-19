@@ -14,7 +14,7 @@ export const useRemoveFromCollection = () => {
       return response.data;
     },
     {
-      onSuccess: (data) => {
+      onSuccess: () => {
         queryClient.invalidateQueries(["collections"]);
       },
     }

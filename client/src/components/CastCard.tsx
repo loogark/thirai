@@ -1,8 +1,6 @@
 import { AspectRatio, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { Link as ReactRouterLink } from "react-router-dom";
-import { useIsHovered } from "../hooks/useIsHovered";
 import { Like } from "./Like";
 
 interface Props {
@@ -10,9 +8,6 @@ interface Props {
 }
 
 export const CastCard = ({ data }: Props) => {
-  const [parentRef, setParentRef] = useState<HTMLDivElement | null>(null);
-  const isHovered = useIsHovered([parentRef]).some(Boolean);
-
   const item = {
     hidden: { opacity: 0 },
     show: { opacity: 1 },
@@ -23,7 +18,6 @@ export const CastCard = ({ data }: Props) => {
       layout
       as={motion.div}
       variants={item}
-      ref={setParentRef}
       gap={2}
       w={{ base: "150px", md: "250px" }}
       h='100%'

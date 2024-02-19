@@ -83,7 +83,7 @@ export const PosterRow = ({ data }: Props) => {
             </Flex>
           ))}
         </Flex>
-        <ScrollHandlers data={data} ref={ref as RefObject<typeof ref>} />
+        <ScrollHandlers ref={ref as RefObject<typeof ref>} />
       </Box>
     </Flex>
   );

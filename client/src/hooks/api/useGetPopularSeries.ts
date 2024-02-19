@@ -18,7 +18,6 @@ export const useGetPopularSeries = () => {
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
-      onSuccess: (data) => {},
     }
   );
 

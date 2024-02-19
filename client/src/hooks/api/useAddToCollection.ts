@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useUser } from "../../context/UserProvider";
-import { API, queryClient } from "../../utils/query";
+import { API } from "../../utils/query";
 
 interface CollectionData {
   mediaId: string;
@@ -28,11 +28,6 @@ export const useAddToCollection = () => {
         { headers: { Authorization: `Bearer ${user?.token}` } }
       );
       return response.data;
-    },
-    {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(["collections"]);
-      },
     }
   );
   return mutation;

@@ -14,7 +14,7 @@ interface Props {
   isShow?: boolean;
 }
 
-export const MovieRow = ({ data, loading, title, path, isShow }: Props) => {
+export const MovieRow = ({ data, title, path, isShow }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
 
@@ -83,10 +83,7 @@ export const MovieRow = ({ data, loading, title, path, isShow }: Props) => {
           {data?.results?.map((movie: any) => (
             <MovieCard key={data.id} data={movie} isShow={isShow} />
           ))}
-          <ScrollHandlers
-            data={data?.results}
-            ref={ref as RefObject<typeof ref>}
-          />
+          <ScrollHandlers ref={ref as RefObject<typeof ref>} />
         </Flex>
       </Box>
     </Flex>

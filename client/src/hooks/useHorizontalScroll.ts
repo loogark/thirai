@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const useHorizontalScroll = (
-  ref: React.RefObject<HTMLElement>,
-  content: Array<Record<string, any>>
-) => {
+export const useHorizontalScroll = (ref: React.RefObject<HTMLElement>) => {
   const [showScrollLeft, setShowScrollLeft] = useState(false);
   const [showScrollRight, setShowScrollRight] = useState(false);
 

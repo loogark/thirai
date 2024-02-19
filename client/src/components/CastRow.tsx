@@ -13,7 +13,7 @@ interface Props {
   title: string;
 }
 
-export const CastRow = ({ data, loading, isCrew, title }: Props) => {
+export const CastRow = ({ data, isCrew, title }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
 
@@ -74,10 +74,7 @@ export const CastRow = ({ data, loading, isCrew, title }: Props) => {
               <CastCard key={data?.name} data={movie} />
             )
           )}
-          <ScrollHandlers
-            data={data as Record<string, any>[]}
-            ref={ref as RefObject<typeof ref>}
-          />
+          <ScrollHandlers ref={ref as RefObject<typeof ref>} />
         </Flex>
       </Box>
     </Flex>

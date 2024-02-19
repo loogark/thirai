@@ -3,16 +3,11 @@ import { MutableRefObject, forwardRef } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useHorizontalScroll } from "../hooks/useHorizontalScroll";
 
-interface Props {
-  data: Record<string, any>[];
-}
-
 export type Ref = React.RefObject<HTMLDivElement | null>;
 
-export const ScrollHandlers = forwardRef<Ref, Props>(({ data }, ref) => {
+export const ScrollHandlers = forwardRef<Ref>((ref) => {
   const [showScrollLeft, showScrollRight] = useHorizontalScroll(
-    ref as MutableRefObject<HTMLInputElement | null>,
-    data
+    ref as MutableRefObject<HTMLInputElement | null>
   );
 
   const scrollHorizontally = (scrollOffset: number) => {

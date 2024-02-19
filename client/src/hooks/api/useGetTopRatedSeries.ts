@@ -18,7 +18,6 @@ export const useGetTopRatedSeries = () => {
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
-      onSuccess: (data) => {},
     }
   );
 

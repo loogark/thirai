@@ -18,7 +18,6 @@ export const useGetPopularMovies = () => {
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
-      onSuccess: (data) => {},
     }
   );
 

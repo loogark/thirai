@@ -1,8 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { API } from "../../utils/query";
 
-interface Props {}
-
 export const useGetMovieReviews = (id?: string) => {
   const query = useInfiniteQuery(
     ["movie-review", id],
@@ -20,7 +18,6 @@ export const useGetMovieReviews = (id?: string) => {
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
-      onSuccess: (data) => {},
     }
   );
 

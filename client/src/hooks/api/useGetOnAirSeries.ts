@@ -18,7 +18,6 @@ export const useGetOnAirSeries = () => {
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
-      onSuccess: (data) => {},
     }
   );
 

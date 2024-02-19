@@ -18,7 +18,6 @@ export const useGetTopRatedMovies = () => {
       getNextPageParam: (lastPage) => {
         return lastPage.nextCursor;
       },
-      onSuccess: (data) => {},
     }
   );
 

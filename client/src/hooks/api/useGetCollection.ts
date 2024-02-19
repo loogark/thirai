@@ -6,21 +6,13 @@ export const useGetCollection = () => {
   const { getUser } = useUser();
   const user = getUser();
 
-  const query = useQuery(
-    ["collections"],
-    async () => {
-      const response = await API.get("/user/collection", {
-        userId: user?.userId,
-        headers: { Authorization: `Bearer ${user?.token}` },
-      } as Record<string, any>);
-      return response.data;
-    },
-
-    {
-      onSuccess: (data) => {},
-      enabled: user !== null && user !== undefined,
-    }
-  );
+  const query = useQuery(["collections"], async () => {
+    const response = await API.get("/user/collection", {
+      userId: user?.userId,
+      headers: { Authorization: `Bearer ${user?.token}` },
+    } as Record<string, any>);
+    return response.data;
+  });
 
   return {
     ...query,
