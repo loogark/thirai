@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Icon } from "@chakra-ui/react";
 import { MutableRefObject, forwardRef } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useHorizontalScroll } from "../hooks/useHorizontalScroll";
@@ -27,8 +27,8 @@ export const ScrollHandlers = forwardRef<Ref, Props>(({ data }, ref) => {
       {showScrollRight && (
         <Flex
           position='absolute'
-          height='50px'
-          width='50px'
+          height={{ base: "25px", md: "50px" }}
+          width={{ base: "25px", md: "50px" }}
           borderRadius='full'
           top={"45%"}
           right={"12px"}
@@ -39,14 +39,18 @@ export const ScrollHandlers = forwardRef<Ref, Props>(({ data }, ref) => {
           cursor='pointer'
           onClick={() => scrollHorizontally(150)}
         >
-          <IoIosArrowForward size={40} color='white' />
+          <Icon
+            as={IoIosArrowForward}
+            color='white'
+            boxSize={{ base: 4, lg: 8 }}
+          />
         </Flex>
       )}
       {showScrollLeft && (
         <Flex
           position='absolute'
-          height='50px'
-          width='50px'
+          height={{ base: "25px", md: "50px" }}
+          width={{ base: "25px", md: "50px" }}
           borderRadius='full'
           top={"45%"}
           left={"12px"}
@@ -57,7 +61,11 @@ export const ScrollHandlers = forwardRef<Ref, Props>(({ data }, ref) => {
           cursor='pointer'
           onClick={() => scrollHorizontally(-150)}
         >
-          <IoIosArrowBack size={40} color='white' />
+          <Icon
+            as={IoIosArrowBack}
+            color='white'
+            boxSize={{ base: 4, lg: 8 }}
+          />
         </Flex>
       )}
     </>

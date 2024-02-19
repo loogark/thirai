@@ -18,8 +18,12 @@ export const useGetCollection = () => {
 
     {
       onSuccess: (data) => {},
+      enabled: user !== null && user !== undefined,
     }
   );
 
-  return query;
+  return {
+    ...query,
+    isLoading: query.isLoading && query.fetchStatus !== "idle",
+  };
 };

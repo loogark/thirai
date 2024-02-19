@@ -31,7 +31,7 @@ export const AuthModal = () => {
       <Modal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Welcome to Thirai !</ModalHeader>
+          <ModalHeader color='#525CEB'>Welcome to Thirai !</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Auth />

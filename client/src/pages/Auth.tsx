@@ -194,7 +194,7 @@ export const Auth = () => {
               </FormControl>
             </Stack>
             <Stack spacing='6'>
-              <Button onClick={onSubmit}>
+              <Button bg={"#525CEB"} onClick={onSubmit}>
                 {isSignUp ? "Sign up" : "Sign in"}
               </Button>
             </Stack>

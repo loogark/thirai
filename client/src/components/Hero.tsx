@@ -58,13 +58,13 @@ export const Hero = ({ data, loading, status, isClickable }: Props) => {
         align='start'
         direction='column'
         w='100%'
-        h='90vh'
+        h={{ base: "70vh", md: "80vh", lg: "90vh" }}
         overflow='hidden'
         position='relative'
         cursor={isClickable ? "pointer" : "auto"}
         onClick={() => isClickable && navigate(`/${pathType}/${data?.id}`)}
       >
-        <AspectRatio ratio={16 / 9} w='100%' overflow='hidden'>
+        <AspectRatio ratio={{ base: 1, md: 16 / 9 }} w='100%' overflow='hidden'>
           <Image
             src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
             alt={`${data?.title || data?.name} backdrop image`}
@@ -85,7 +85,7 @@ export const Hero = ({ data, loading, status, isClickable }: Props) => {
           padding='2.5rem'
           position='absolute'
           bottom='50px'
-          w='60%'
+          w={{ base: "100%", md: "80%", lg: "60%" }}
           direction='column'
           align='start'
           justifyContent='start'
@@ -94,12 +94,17 @@ export const Hero = ({ data, loading, status, isClickable }: Props) => {
           gap={2}
         >
           <HStack gap='2' align='center' justify='center'>
-            <Heading textAlign='start' as='h1' size='xl' color='white'>
+            <Heading
+              textAlign='start'
+              as='h1'
+              size={{ base: "sm", md: "lg", lg: "xl" }}
+              color='white'
+            >
               {data?.original_title ?? data?.original_name}{" "}
               {data?.release_date && `(${getYearFromDate(data?.release_date)})`}
             </Heading>
           </HStack>
-          <HStack gap='2' mr='4px'>
+          <HStack wrap='wrap' gap='2' mr='4px'>
             {data?.genres?.map((genre: Record<string, any>) => (
               <Tag variant='solid' colorScheme='blue' key={genre.id}>
                 {genre.name}
@@ -109,7 +114,12 @@ export const Hero = ({ data, loading, status, isClickable }: Props) => {
               <Tag colorScheme='red' variant='solid'>{`Status: ${status}`}</Tag>
             )}
           </HStack>
-          <Text textAlign='start' noOfLines={3} fontSize='lg' color='white'>
+          <Text
+            textAlign='start'
+            noOfLines={{ base: 2, md: 3 }}
+            fontSize={{ base: "sm", md: "md", lg: "lg" }}
+            color='white'
+          >
             {data?.overview}{" "}
           </Text>
           <HStack gap='2'>
