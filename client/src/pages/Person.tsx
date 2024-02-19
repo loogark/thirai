@@ -5,6 +5,7 @@ import {
   Heading,
   Image,
   Link,
+  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -43,6 +44,23 @@ export const Person = () => {
     });
   }, []);
 
+  if (isLoading)
+    return (
+      <Flex
+        direction='column'
+        align='center'
+        justify='center'
+        w='100%'
+        h='100vh'
+        gap={8}
+        mt='76px'
+        px='54px'
+        py='36px'
+      >
+        <Spinner size='xl' color='#525CEB' />
+      </Flex>
+    );
+
   return (
     <Flex
       direction='column'
@@ -52,14 +70,30 @@ export const Person = () => {
       h='100%'
       gap={8}
       mt='76px'
-      px='54px'
+      px={{ base: "12px", md: "32px", lg: "54px" }}
       py='36px'
     >
-      <Heading color={"white"} as='h1' size='lg'>
+      <Heading
+        color={"white"}
+        as='h1'
+        size={{ base: "sm", md: "md", lg: "lg" }}
+      >
         {data?.name}{" "}
       </Heading>
-      <Flex dir='row' justify='start' align='start' gap='12px' width='100%'>
-        <AspectRatio flexShrink={0} ratio={0.67 / 1} w='300px' h='fit-content'>
+      <Flex
+        direction={{ base: "column", md: "row", lg: "row" }}
+        justify='start'
+        align='start'
+        gap='12px'
+        width='100%'
+      >
+        <AspectRatio
+          flexShrink={0}
+          ratio={0.67 / 1}
+          w={{ base: "80%", md: "250px", lg: "300px" }}
+          h='fit-content'
+          m={{ base: "auto", md: "none" }}
+        >
           <Image
             src={
               data?.profile_path
