@@ -1,9 +1,7 @@
 {
   "version": 2,
   "build": "rimraf dist && tsc",
-  "add-build": "git add dist",
-  "ts.check": "tsc --project tsconfig.json",
-  "devCommand": "yarn dev",
+  "start": "nodemon src/server.ts",
   "outputDirectory": "dist",
   "builds": [
     {
