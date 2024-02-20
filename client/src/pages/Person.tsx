@@ -244,6 +244,9 @@ export const Person = () => {
                 direction='row'
                 justify='center'
                 align='center'
+                w='100%'
+                h='fit-content'
+                boxSizing='border-box'
                 wrap='wrap'
                 gap={4}
               >
@@ -260,7 +263,7 @@ export const Person = () => {
                         w={image?.width}
                         cursor='pointer'
                         h='fit-content'
-                        maxW={{ sm: "100%", md: "400px" }}
+                        maxW={{ sm: "90vw", md: "400px" }}
                         ratio={image?.aspect_ratio}
                       >
                         <Image

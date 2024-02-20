@@ -179,7 +179,7 @@ export const Show = () => {
                               w={backdrop?.width}
                               cursor='pointer'
                               h='fit-content'
-                              maxW={{ sm: "100%", md: "400px" }}
+                              maxW={{ sm: "90vw", md: "400px" }}
                               ratio={backdrop?.aspect_ratio}
                             >
                               <Image
