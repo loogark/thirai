@@ -260,7 +260,7 @@ export const Person = () => {
                         w={image?.width}
                         cursor='pointer'
                         h='fit-content'
-                        maxW='400px'
+                        maxW={{ sm: "100%", md: "400px" }}
                         ratio={image?.aspect_ratio}
                       >
                         <Image
