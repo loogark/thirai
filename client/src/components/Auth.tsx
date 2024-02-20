@@ -6,6 +6,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Spinner,
   Stack,
   Text,
   useToast,
@@ -195,7 +196,13 @@ export const Auth = () => {
             </Stack>
             <Stack spacing='6'>
               <Button bg={"#525CEB"} onClick={onSubmit}>
-                {isSignUp ? "Sign up" : "Sign in"}
+                {register.isLoading || login.isLoading ? (
+                  <Spinner size='sm' color='#525CEB' />
+                ) : isSignUp ? (
+                  "Sign up"
+                ) : (
+                  "Sign in"
+                )}
               </Button>
             </Stack>
           </Stack>
