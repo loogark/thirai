@@ -154,7 +154,7 @@ export const Movie = () => {
                             w={backdrop?.width}
                             cursor='pointer'
                             h='fit-content'
-                            maxW={{ base: "90vw", md: "400px" }}
+                            maxW={{ base: "90vw", md: "38vw", lg: "400px" }}
                             ratio={backdrop?.aspect_ratio}
                           >
                             <Image

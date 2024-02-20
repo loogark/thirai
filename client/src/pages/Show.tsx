@@ -162,7 +162,7 @@ export const Show = () => {
                       </Heading>
                       <Flex
                         direction='row'
-                        justify='flex-start'
+                        justify='center'
                         align='center'
                         wrap='wrap'
                         w='100%'
@@ -180,7 +180,7 @@ export const Show = () => {
                               w={backdrop?.width}
                               cursor='pointer'
                               h='fit-content'
-                              maxW={{ base: "90vw", md: "400px" }}
+                              maxW={{ base: "90vw", md: "38vw", lg: "400px" }}
                               ratio={backdrop?.aspect_ratio}
                             >
                               <Image
