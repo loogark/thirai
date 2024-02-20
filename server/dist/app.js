@@ -12,7 +12,7 @@ const tmdb_1 = __importDefault(require("./routes/tmdb"));
 const user_1 = __importDefault(require("./routes/user"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: "https://thirai.vercel.app/",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
