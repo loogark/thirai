@@ -140,6 +140,7 @@ export const Movie = () => {
                       align='center'
                       wrap='wrap'
                       gap={4}
+                      w='100%'
                     >
                       {data?.images?.backdrops?.map((backdrop: any) => (
                         <Flex

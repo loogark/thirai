@@ -139,7 +139,7 @@ export const Show = () => {
               </Flex>
             </TabPanel>
             <TabPanel>
-              <Flex direction='column' gap='8px' p='24px'>
+              <Flex w='100%' direction='column' gap='8px' p='24px'>
                 {data?.images?.posters &&
                   data?.images?.posters.length !== 0 && (
                     <PosterRow
@@ -165,6 +165,7 @@ export const Show = () => {
                         justify='flex-start'
                         align='center'
                         wrap='wrap'
+                        w='100%'
                         gap={4}
                       >
                         {data?.images?.backdrops?.map((backdrop: any) => (
