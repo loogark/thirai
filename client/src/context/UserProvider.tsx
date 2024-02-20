@@ -1,4 +1,5 @@
 import React, { ReactNode, useContext } from "react";
+import { queryClient } from "../utils/query";
 
 interface UserContextType {
   getUser: () => Record<string, string>;
@@ -27,6 +28,7 @@ export const UsersProvider = ({ children }: Props) => {
 
   const removeUser = () => {
     localStorage.removeItem("user");
+    queryClient.invalidateQueries(["collections"]);
   };
 
   const value = {

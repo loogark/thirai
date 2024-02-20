@@ -1,5 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import { StandAloneToast } from "../StandAloneToast";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,24 +21,26 @@ const onRejected = async (err: any) => {
 
   switch (status) {
     case 402: {
-      const { type, message } = err.response.data.error;
-      console.log(type, message);
+      const { error } = err.response.data;
+      StandAloneToast({ message: error, status: err.response.status });
       break;
     }
     default: {
       if (status < 400) break;
       else if (status >= 500) {
-        console.log(
-          "An unknown error has occurred during the request." +
-            "Try to refresh the page. If the issue persists, please contact us."
-        );
+        StandAloneToast({
+          message:
+            "An unknown error has occurred during the request." +
+            "Try to refresh the page. If the issue persists, please contact me.",
+          status: err.response.status,
+        });
         break;
       }
 
       try {
-        const { type, message } = err.response.data.error;
-        console.log(message);
-        if (message === type) break;
+        const { error } = err.response.data;
+        StandAloneToast({ message: error, status: err.response.status });
+        if (error) break;
       } catch (ex) {
         console.log(ex);
       }

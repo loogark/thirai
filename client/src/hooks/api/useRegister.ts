@@ -35,9 +35,6 @@ const useRegister = () => {
         });
         navigate("/home");
       },
-      onError: (error) => {
-        console.log(error);
-      },
     }
   );
 

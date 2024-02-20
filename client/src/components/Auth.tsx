@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthModal } from "../context/AuthModalProvider";
 import { useUser } from "../context/UserProvider";
 import useLogin from "../hooks/api/useLogin";
 import useRegister from "../hooks/api/useRegister";
@@ -25,6 +26,7 @@ export const Auth = () => {
   const { getUser } = useUser();
   const navigate = useNavigate();
   const toast = useToast();
+  const { setAuthModalOpen } = useAuthModal();
 
   useEffect(() => {
     return () => {
@@ -84,6 +86,7 @@ export const Auth = () => {
         firstName: value.name,
         password: value.password,
       });
+      setAuthModalOpen(false);
     } else {
       if (value.email === "" || value.password === "") {
         toast({
@@ -109,6 +112,7 @@ export const Auth = () => {
         email: value.email,
         password: value.password,
       });
+      setAuthModalOpen(false);
     }
   };
 
@@ -197,7 +201,7 @@ export const Auth = () => {
             <Stack spacing='6'>
               <Button bg={"#525CEB"} onClick={onSubmit}>
                 {register.isLoading || login.isLoading ? (
-                  <Spinner size='sm' color='#525CEB' />
+                  <Spinner size='sm' color='white' />
                 ) : isSignUp ? (
                   "Sign up"
                 ) : (

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Tag } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spinner, Tag } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { motion, useInView } from "framer-motion";
 import { RefObject, useRef } from "react";
@@ -14,7 +14,7 @@ interface Props {
   isShow?: boolean;
 }
 
-export const MovieRow = ({ data, title, path, isShow }: Props) => {
+export const MovieRow = ({ data, title, path, isShow, loading }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
 
@@ -27,6 +27,14 @@ export const MovieRow = ({ data, title, path, isShow }: Props) => {
       },
     },
   };
+
+  if (loading) {
+    return (
+      <Flex py='52px' w='100%' h='100%' justify='center' align='center'>
+        <Spinner size='xl' color='#535bf2' />
+      </Flex>
+    );
+  }
 
   return (
     <Flex

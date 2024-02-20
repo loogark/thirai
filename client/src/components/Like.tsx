@@ -28,6 +28,27 @@ export const Like = ({ data }: Props) => {
     [collectionData?.collection, data?.id, isLoading, data?.mediaId]
   );
 
+  const handleLike = () => {
+    if (user) {
+      if (collectItem !== undefined) {
+        removeFromCollection.mutate({ id: data?._id ?? collectItem?._id });
+      } else {
+        addToCollection.mutate({
+          mediaId: data?.id,
+          media_type: data?.media_type ?? "person",
+          original_title:
+            data?.original_title ?? data?.original_name ?? data?.name,
+          poster_path: data?.media_type ? data?.poster_path : undefined,
+          profile_path: !data?.media_type ? data?.profile_path : undefined,
+          vote_average: data?.vote_average,
+          vote_count: data?.vote_count,
+        });
+      }
+    } else {
+      setAuthModalOpen(true);
+    }
+  };
+
   return (
     <Box
       cursor='pointer'
@@ -36,30 +57,13 @@ export const Like = ({ data }: Props) => {
       h='fit-content'
       as={motion.div}
       whileTap={{ scale: 0.8 }}
-      onClick={() => {
-        user
-          ? collectItem !== undefined
-            ? removeFromCollection.mutate({ id: data?._id ?? collectItem?._id })
-            : addToCollection.mutate({
-                mediaId: data?.id,
-                media_type: data?.media_type ?? "person",
-                original_title:
-                  data?.original_title ?? data?.original_name ?? data?.name,
-                poster_path: data?.media_type ? data?.poster_path : undefined,
-                profile_path: !data?.media_type
-                  ? data?.profile_path
-                  : undefined,
-                vote_average: data?.vote_average,
-                vote_count: data?.vote_count,
-              })
-          : setAuthModalOpen(true);
-      }}
+      onClick={handleLike}
     >
       {isLoading ||
       addToCollection.isLoading ||
       removeFromCollection.isLoading ? (
         <Spinner size='xs' color='#525CEB' />
-      ) : collectItem !== undefined ? (
+      ) : collectItem !== undefined && user ? (
         <FaHeart color='#525CEB' />
       ) : (
         <FaRegHeart color='white' />

@@ -1,4 +1,11 @@
-import { AspectRatio, Box, Flex, Heading, Image } from "@chakra-ui/react";
+import {
+  AspectRatio,
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Spinner,
+} from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { motion, useInView } from "framer-motion";
 import { RefObject, useRef } from "react";
@@ -9,7 +16,7 @@ interface Props {
   loading: boolean;
 }
 
-export const PosterRow = ({ data }: Props) => {
+export const PosterRow = ({ data, loading }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref);
 
@@ -22,6 +29,14 @@ export const PosterRow = ({ data }: Props) => {
       },
     },
   };
+
+  if (loading) {
+    return (
+      <Flex py='52px' w='100%' h='100%' justify='center' align='center'>
+        <Spinner size='xl' color='#535bf2' />
+      </Flex>
+    );
+  }
 
   if (!data?.length) return null;
 

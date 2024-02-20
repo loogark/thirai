@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import {
@@ -18,6 +18,7 @@ function App() {
   const proTheme = createTheme();
   const navigate = useNavigate();
   const location = useLocation();
+  const { ToastContainer } = createStandaloneToast();
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -32,6 +33,7 @@ function App() {
           <UsersProvider>
             <Header />
             <Outlet />
+            <ToastContainer />
             <Footer />
             <ScrollRestoration />
           </UsersProvider>

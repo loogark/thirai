@@ -5,7 +5,7 @@ import { useHorizontalScroll } from "../hooks/useHorizontalScroll";
 
 export type Ref = React.RefObject<HTMLDivElement | null>;
 
-export const ScrollHandlers = forwardRef<Ref>((ref) => {
+export const ScrollHandlers = forwardRef<Ref>((_, ref) => {
   const [showScrollLeft, showScrollRight] = useHorizontalScroll(
     ref as MutableRefObject<HTMLInputElement | null>
   );
