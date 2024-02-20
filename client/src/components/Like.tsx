@@ -25,7 +25,7 @@ export const Like = ({ data }: Props) => {
       collectionData?.collection?.find((item: any) => {
         return item?.mediaId === data?.id || data?.mediaId;
       }),
-    [collectionData?.collection, data?.id, isLoading]
+    [collectionData?.collection, data?.id, isLoading, data?.mediaId]
   );
 
   return (
